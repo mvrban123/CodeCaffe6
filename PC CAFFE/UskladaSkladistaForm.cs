@@ -42,8 +42,9 @@ namespace PCPOS
                 pictureBox1.Enabled = false;
                 dgwArtikliUsklade.Columns[5].ReadOnly = true;
             }
-            //dgwArtikliUsklade.Columns[5].Visible = false;
-            //dgwArtikliUsklade.Columns[6].Visible = false;
+            dgwArtikliUsklade.Columns[5].Visible = false;
+            dgwArtikliUsklade.Columns[6].Visible = false;
+            dgwArtikliUsklade.Columns[7].Visible = false;
             this.Paint += new PaintEventHandler(Class.Postavke.changeBackground);
         }
 

@@ -602,6 +602,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NarudzbeNaStoluDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Report\Usklada skladista\UskladaSkladistaReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\Usklada skladista\UskladaSkladistaReportForm.Designer.cs">
+      <DependentUpon>UskladaSkladistaReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SQL\SQLusklada_skladista.cs" />
     <Compile Include="SveUskladaRobeNaSkladistuForm.cs">
       <SubType>Form</SubType>
@@ -1848,6 +1854,10 @@
       <DependentUpon>FrmNarudzbeNaStolu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\NaruzdbeNaStolu\ReportNarudzbeNaStolu.rdlc" />
+    <EmbeddedResource Include="Report\Usklada skladista\UskladaSkladistaReportForm.resx">
+      <DependentUpon>UskladaSkladistaReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Usklada skladista\UskladaSkladistaReport.rdlc" />
     <EmbeddedResource Include="SveUskladaRobeNaSkladistuForm.resx">
       <DependentUpon>SveUskladaRobeNaSkladistuForm.cs</DependentUpon>
     </EmbeddedResource>

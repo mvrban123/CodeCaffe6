@@ -1351,6 +1351,8 @@ namespace PCPOS.Caffe
 
         private void btnOdjava_Click(object sender, EventArgs e)
         {
+            this.Close();
+            /*
             switch (Properties.Settings.Default.id_dopustenje)
             {
                 case 1:
@@ -1365,7 +1367,7 @@ namespace PCPOS.Caffe
                 case 4:
                     CloseForm();
                     break;
-            }
+            }*/
         }
 
         private void CloseForm()
@@ -1984,8 +1986,14 @@ sql);
                     /*Properties.Settings.Default.prvi = chbPrvi.Checked;
                     Properties.Settings.Default.drugi = chbDrugi.Checked;
                     Properties.Settings.Default.treci = chbTreci.Checked;*/
-
-                    PosPrint.classPosPrintCaffe.PrintReceipt(DTfiltered ?? DTsend, idOdabraniZaposlenikNaplate.ToString(), brRac + "/" + DateTime.Now.Year.ToString(), sifraPartnera, barcode, brRac, nacin_placanja, "", karticaIznosZaOduzeti, Convert.ToDecimal((((decimal)ukupnoBezRabata - karticaIznosZaOduzeti) / (decimal)ukupnoBezRabata)), vraceniIznos);
+                    if (DTpostavkePrinter.Rows[0]["posPrinterBool"].ToString() != "0")
+                    {
+                        PosPrint.classPosPrintCaffe.PrintReceipt(DTfiltered ?? DTsend, idOdabraniZaposlenikNaplate.ToString(), brRac + "/" + DateTime.Now.Year.ToString(), sifraPartnera, barcode, brRac, nacin_placanja, "", karticaIznosZaOduzeti, Convert.ToDecimal((((decimal)ukupnoBezRabata - karticaIznosZaOduzeti) / (decimal)ukupnoBezRabata)), vraceniIznos);
+                    }
+                    else
+                    {
+                        PrikazRacunaAkoJEiskljucenaAktivnostPOSPrintera();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -2000,20 +2008,24 @@ sql);
             }
             finally
             {
-                if (DTpostavkePrinter.Rows[0]["windows_printer_sank"].ToString() != "Nije instaliran")
-                    PosPrint.classPosPrintKuhinja.PrintOnPrinter1(DTsend);
+                if (DTpostavkePrinter.Rows[0]["posPrinterBool"].ToString() != "0")
+                {
+                    if (DTpostavkePrinter.Rows[0]["windows_printer_sank"].ToString() != "Nije instaliran")
+                        PosPrint.classPosPrintKuhinja.PrintOnPrinter1(DTsend);
+                    //PosPrint.classPosPrintKuhinja.
 
-                if (DTpostavkePrinter.Rows[0]["windows_printer_name2"].ToString() != "Nije instaliran")
-                    PosPrint.classPosPrintKuhinja.PrintOnPrinter2(DTsend);
+                    if (DTpostavkePrinter.Rows[0]["windows_printer_name2"].ToString() != "Nije instaliran")
+                        PosPrint.classPosPrintKuhinja.PrintOnPrinter2(DTsend);
 
-                if (DTpostavkePrinter.Rows[0]["windows_printer_name3"].ToString() != "Nije instaliran")
-                    PosPrint.classPosPrintKuhinja.PrintOnPrinter3(DTsend);
+                    if (DTpostavkePrinter.Rows[0]["windows_printer_name3"].ToString() != "Nije instaliran")
+                        PosPrint.classPosPrintKuhinja.PrintOnPrinter3(DTsend);
 
-                //Ako postoji uopce koja grupa da je ozancena za 4. printer u postavkama POS opreme
-                classPosPrintKuhinja.NapuniListuOznacenimGrupama();
-                //Ako je instaliran printer && ako ima bilo koja oznacena grupa u POS Postavke && Ako ima artikl na racunu koji se nalazi u oznacenoj grupi
-                if (DTpostavkePrinter.Rows[0][29].ToString() != "Nije instaliran" && classPosPrintKuhinja.listaOznacenihGrupa.Count > 0 && classPosPrintKuhinja.ArtiklIzOznaceneGrupePostojan)
-                    PosPrint.classPosPrintKuhinja.PrintOnPrinter10(DTsend);
+                    //Ako postoji uopce koja grupa da je ozancena za 4. printer u postavkama POS opreme
+                    classPosPrintKuhinja.NapuniListuOznacenimGrupama();
+                    //Ako je instaliran printer && ako ima bilo koja oznacena grupa u POS Postavke && Ako ima artikl na racunu koji se nalazi u oznacenoj grupi
+                    if (DTpostavkePrinter.Rows[0][29].ToString() != "Nije instaliran" && classPosPrintKuhinja.listaOznacenihGrupa.Count > 0 && classPosPrintKuhinja.ArtiklIzOznaceneGrupePostojan)
+                        PosPrint.classPosPrintKuhinja.PrintOnPrinter10(DTsend);
+                }
             }
 
             lblKupac.Text = "";
@@ -2461,6 +2473,32 @@ remote);
                 }
             }
             catch (Exception) { }
+        }
+
+        public void PrikazRacunaAkoJEiskljucenaAktivnostPOSPrintera()
+        {
+            try
+            {
+                DataTable DTzR = classSQL.select("SELECT broj_racuna,ukupno FROM racuni " +
+                " WHERE godina='" + DateTime.Now.Year.ToString() + "' AND id_kasa='" + id_kasa + "' AND id_ducan='" + id_ducan + "'" +
+                " ORDER BY CAST(broj_racuna AS INT) DESC LIMIT 1", "racuni").Tables[0];
+                if (DTzR.Rows.Count > 0)
+                {
+                    Report.Faktura.repFaktura rfak = new Report.Faktura.repFaktura();
+                    rfak.dokumenat = "RAC";
+                    rfak.ImeForme = "Račun";
+                    rfak.broj_dokumenta = DTzR.Rows[0]["broj_racuna"].ToString();
+
+                    rfak.godina = DateTime.Now.Year.ToString();
+                    rfak.id_kasa = id_ducan;
+                    rfak.id_poslovnica = id_ducan;
+
+                    rfak.ShowDialog();
+                }
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void btnNarudzbe_Click(object sender, EventArgs e)
