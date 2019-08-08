@@ -889,5 +889,17 @@ namespace PCPOS
                 return cp;
             }
         }
+
+       /* private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // UskladaSkladistaForm
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "UskladaSkladistaForm";
+            this.ResumeLayout(false);
+
+        }*/
     }
 }

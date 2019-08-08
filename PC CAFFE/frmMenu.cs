@@ -1826,5 +1826,11 @@ namespace PCPOS
             uskladaSkladista.Dock = DockStyle.Fill;
             uskladaSkladista.Show();
         }
+
+        private void postavkeZaSlanjeDokumentacijeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmPostavkeZaSlanjeDokumentacije frmPostavkeZaSlanjeDokumentacije = new FrmPostavkeZaSlanjeDokumentacije();
+            frmPostavkeZaSlanjeDokumentacije.ShowDialog();
+        }
     }
 }

@@ -64,6 +64,7 @@
             this.btnSveFakture.Text = "Ispis inventure";
             this.btnSveFakture.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSveFakture.UseVisualStyleBackColor = false;
+            this.btnSveFakture.Click += new System.EventHandler(this.btnSveFakture_Click);
             // 
             // button1
             // 

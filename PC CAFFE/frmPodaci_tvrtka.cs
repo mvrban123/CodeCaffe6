@@ -65,13 +65,9 @@ namespace PCPOS
             rtbKrajDokumenta.Text = (DTpodaci.Rows[0]["text_bottom"] == null || DTpodaci.Rows[0]["text_bottom"].ToString().Length == 0 ? "-" : DTpodaci.Rows[0]["text_bottom"].ToString());
             cbR1.SelectedValue = DTpodaci.Rows[0]["r1"].ToString();
             tbPPMIPO.Text = (DTpodaci.Rows[0]["sifra_ppmipo"] == null || DTpodaci.Rows[0]["sifra_ppmipo"].ToString().Length == 0 ? "-" : DTpodaci.Rows[0]["sifra_ppmipo"].ToString());
-        }
+            tbEmailZaSlanjeDokUKnjigovodstvo.Text= (DTpodaci.Rows[0]["email_knjigovodstvo"].ToString()); // Ovak treba sve ici, ovo gore je neko sranje znapisano
+        } 
 
-        //void Form1_Paint (object sender, PaintEventArgs e) {
-        //    Graphics c = e.Graphics;
-        //    Brush bG = new LinearGradientBrush(new Rectangle(0, 0, Width, Height), Color.AliceBlue, Color.LightSlateGray, 250);
-        //    c.FillRectangle(bG, 0, 0, Width, Height);
-        //}
 
         private void brnSpremi_Click(object sender, EventArgs e)
         {
@@ -99,7 +95,8 @@ namespace PCPOS
                 " naziv_fakture='" + txtNaslovFakture.Text + "'," +
                 " naslov_racuna='" + cbR1.Text + "  " + "'," +
                 " r1='" + cbR1.SelectedValue + "'," +
-                " sifra_ppmipo='" + tbPPMIPO.Text + "'" +
+                " sifra_ppmipo='" + tbPPMIPO.Text + "'," +
+                " email_knjigovodstvo='"+tbEmailZaSlanjeDokUKnjigovodstvo.Text+"'"+
                 " WHERE id='1'" +
                 "";
 

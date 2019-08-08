@@ -172,6 +172,8 @@
             // dtpDoDatuma
             // 
             this.dtpDoDatuma.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.dtpDoDatuma.CustomFormat = "dd/MM/yyyy";
+            this.dtpDoDatuma.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDoDatuma.Location = new System.Drawing.Point(118, 48);
             this.dtpDoDatuma.Name = "dtpDoDatuma";
             this.dtpDoDatuma.Size = new System.Drawing.Size(145, 20);
@@ -180,6 +182,8 @@
             // dtpOdDatuma
             // 
             this.dtpOdDatuma.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.dtpOdDatuma.CustomFormat = "dd/MM/yyyy";
+            this.dtpOdDatuma.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpOdDatuma.Location = new System.Drawing.Point(118, 19);
             this.dtpOdDatuma.Name = "dtpOdDatuma";
             this.dtpOdDatuma.Size = new System.Drawing.Size(145, 20);

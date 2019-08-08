@@ -16,9 +16,11 @@ namespace PCPOS.Report.Kalkposkl
         public DateTime datumOD { get; set; }
         public DateTime datumDO { get; set; }
 
-        public KalkulacijeForm()
+        private bool spremiPdf;
+        public KalkulacijeForm(bool spremiPdf)
         {
             InitializeComponent();
+            this.spremiPdf = spremiPdf;
         }
 
         private void KalkulacijeForm_Load(object sender, EventArgs e)
@@ -41,6 +43,21 @@ namespace PCPOS.Report.Kalkposkl
             this.reportViewer.LocalReport.ReportEmbeddedResource = "PCPOS.Report.Kalkposkl.Kalkulacije.rdlc";
             this.reportViewer.LocalReport.EnableExternalImages = true;
             this.reportViewer.RefreshReport();
+
+
+             if (spremiPdf)
+             {
+                 Warning[] warnings;
+                 string[] streamids;
+                 string mimeType, encoding, extension;
+                 byte[] bytes = reportViewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamids, out warnings);
+
+                 string pdfPath = $@"C:\Users\Korisnik\Desktop\Kalkulacije." + extension; // navesti novu putanjju
+                 System.IO.FileStream pdfFile = new System.IO.FileStream(pdfPath, System.IO.FileMode.Create);
+                 pdfFile.Write(bytes, 0, bytes.Length);
+                 pdfFile.Close();
+                 this.Close();
+             }
         }
 
         private void LoadData()

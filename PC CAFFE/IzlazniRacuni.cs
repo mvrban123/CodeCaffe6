@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Reporting.WinForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,15 +14,42 @@ namespace PCPOS
     public partial class IzlazniRacuni : Form
     {
         private bool isFaktura = true;
+        private bool slanjeDokumentacije;
+        private string cmbIme;
+        private DateTime? pocetniDatum;
+        private DateTime? zavrsniDatum;
 
-        public IzlazniRacuni()
+        public IzlazniRacuni(bool slanjeDokumentacije = false,string cmbIme=null,DateTime? pocetniDatum = null, DateTime? zavrsniDatum = null)
         {
             InitializeComponent();
+            this.slanjeDokumentacije = slanjeDokumentacije;
+            this.cmbIme = cmbIme;
+            this.pocetniDatum = pocetniDatum;
+            this.zavrsniDatum = zavrsniDatum;
         }
 
         private void IzlazniRacuni_Load(object sender, EventArgs e)
         {
             OnFormLoad();
+
+            if (slanjeDokumentacije)
+            {
+                DateTime PocetniDatum = GenerirajDatumSVremenom(Convert.ToDateTime(pocetniDatum), 0, 0, 1);
+                DateTime ZavrsniDatum = GenerirajDatumSVremenom(Convert.ToDateTime(zavrsniDatum), 23, 59, 59);
+
+                cbDatum.Checked = true;
+                cmbDokument.SelectedValue = cmbIme;
+                dtpOdDatuma.Value = Convert.ToDateTime(pocetniDatum);
+                dtpDoDatuma.Value = Convert.ToDateTime(zavrsniDatum);
+                btnIspis.PerformClick();
+            }
+        }
+
+        //Ova funkcija spaja datum i vrijeme u pravilnom formatu
+        private DateTime GenerirajDatumSVremenom(DateTime datum,int hour,int minute, int sec)
+        {
+            string [] dateValues = datum.ToString().Split('.');
+            return new DateTime(Int32.Parse(dateValues[2]), Int32.Parse(dateValues[1]), Int32.Parse(dateValues[0]), hour, minute, sec);
         }
 
         /// <summary>
@@ -106,7 +134,7 @@ namespace PCPOS
             {
                 if ((cmbDokument.SelectedValue.ToString() != "fakt" || Util.Korisno.oibTvrtke != Class.Postavke.OIB_PC1))
                 {
-                    if(isFaktura)
+                    if (isFaktura)
                     {
                         DataTable DTSK1 = new DataTable("IzlazniRacuniSkladiste");
 
@@ -138,9 +166,9 @@ namespace PCPOS
 
         private void btnIspis_Click(object sender, EventArgs e)
         {
-            if(cbDatum.Checked)
+            if (cbDatum.Checked)
             {
-                if(cmbDokument.SelectedValue.ToString() == "fakt")
+                if (cmbDokument.SelectedValue.ToString() == "fakt")
                 {
                     Report.Kalkposkl.FaktureForm faktureForm = new Report.Kalkposkl.FaktureForm();
                     faktureForm.datumOD = dtpOdDatuma.Value.Date;
@@ -150,15 +178,16 @@ namespace PCPOS
 
                 if (cmbDokument.SelectedValue.ToString() == "kalk")
                 {
-                    Report.Kalkposkl.KalkulacijeForm kalkulacijeForm = new Report.Kalkposkl.KalkulacijeForm();
+                    Report.Kalkposkl.KalkulacijeForm kalkulacijeForm = new Report.Kalkposkl.KalkulacijeForm(true);
                     kalkulacijeForm.datumOD = dtpOdDatuma.Value.Date;
                     kalkulacijeForm.datumDO = dtpDoDatuma.Value.Date;
                     kalkulacijeForm.ShowDialog();
+                    this.Close();
                 }
 
                 if (cmbDokument.SelectedValue.ToString() == "prim")
                 {
-                    Report.Kalkposkl.PrimkeForm primkeForm = new Report.Kalkposkl.PrimkeForm();
+                    Report.Kalkposkl.PrimkeForm primkeForm = new Report.Kalkposkl.PrimkeForm(true);
                     primkeForm.BrojFakDO = tbDoRacuna.Text;
                     primkeForm.documenat = cmbDokument.SelectedValue.ToString();
                     primkeForm.prema_rac = cbBrojevi.Checked;
@@ -169,6 +198,7 @@ namespace PCPOS
                     primkeForm.datumOD = dtpOdDatuma.Value.Date;
                     primkeForm.datumDO = dtpDoDatuma.Value.Date;
                     primkeForm.ShowDialog();
+                    this.Close();
                 }
             }
         }

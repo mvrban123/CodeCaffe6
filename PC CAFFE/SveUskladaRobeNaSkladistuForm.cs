@@ -29,5 +29,10 @@ namespace PCPOS
         {
             this.Close();
         }
+
+        private void btnSveFakture_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("BLAAAAAAA");
+        }
     }
 }
