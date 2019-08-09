@@ -12,8 +12,8 @@ namespace PCPOS.Report.Uskladaskladista
             InitializeComponent();
         }
 
-        public string broj_dokumenta { get; set; }
-        public string skladiste { get; set; }
+        public int broj_dokumenta { get; set; }
+        public int skladiste { get; set; }
         public string godina { get; set; }
 
         public string dokumenat { get; set; }
@@ -52,23 +52,12 @@ namespace PCPOS.Report.Uskladaskladista
                 "";
             classSQL.CeAdatpter(sql1).Fill(dSRpodaciTvrtke, "DTRpodaciTvrtke");
 
-            string sql_liste = "SELECT " +
-                " inventura_stavke.sifra_robe AS sifra," +
-                " REPLACE(inventura_stavke.kolicina,',','.') AS cijena4," +
-                " inventura_stavke.naziv," +
-                " inventura_stavke.kolicina_koja_je_bila_na_skl AS cijena2," +
-                " inventura_stavke.cijena AS cijena1," +
-                " roba_prodaja.ulazni_porez," +
-                " (inventura_stavke.cijena+inventura_stavke.povratna_naknada)*inventura_stavke.kolicina_koja_je_bila_na_skl as cijena3," +
-                " inventura_stavke.kolicina as cijena4," +
-                " (inventura_stavke.cijena+inventura_stavke.povratna_naknada)*CAST(REPLACE(inventura_stavke.kolicina,',','.') AS numeric) as cijena5," +
-                " CAST(REPLACE(inventura_stavke.kolicina,',','.') AS numeric)-inventura_stavke.kolicina_koja_je_bila_na_skl as cijena6," +
-                " (CAST(REPLACE(inventura_stavke.kolicina,',','.') AS numeric)-inventura_stavke.kolicina_koja_je_bila_na_skl) * (inventura_stavke.cijena+inventura_stavke.povratna_naknada) as cijena7," +
-                " roba_prodaja.porez_potrosnja" +
-                " FROM inventura_stavke" +
-                " LEFT JOIN inventura ON inventura.broj_inventure=inventura_stavke.broj_inventure" +
-                " LEFT JOIN roba_prodaja ON roba_prodaja.sifra=inventura_stavke.sifra_robe AND roba_prodaja.id_skladiste='" + skladiste + "'" +
-                " WHERE inventura.broj_inventure='" + broj_dokumenta + "'";
+            string sql_liste = "select usklada_robe_stavke.roba_id as sifra,replace(usklada_robe_stavke.nova_kolicina, ',', '.') as cijena4,roba_prodaja.naziv,usklada_robe_stavke.stara_kolicina as cijena2," +
+                                "roba_prodaja.nc as cijena1,roba_prodaja.ulazni_porez, (roba_prodaja.nc) * cast(replace(usklada_robe_stavke.stara_kolicina, ',', '.') as numeric) as cijena3," +
+                                "(roba_prodaja.nc) * cast(replace(usklada_robe_stavke.nova_kolicina, ',', '.') as numeric) as cijena5,cast(replace(usklada_robe_stavke.nova_kolicina, ',', '.') as numeric) - cast(replace(usklada_robe_stavke.stara_kolicina, ',', '.') as numeric) as cijena6," +
+                                "(cast(replace(usklada_robe_stavke.nova_kolicina, ',', '.') as numeric) - cast(replace(usklada_robe_stavke.stara_kolicina, ',', '.') as numeric)) * (roba_prodaja.nc + cast(replace(roba_prodaja.povratna_naknada, ',', '.') as numeric)) as cijena7 " +
+                                "from usklada_robe_stavke left join usklada_robe on usklada_robe_stavke.usklada_id = usklada_robe.id_usklade left join roba_prodaja on cast(roba_prodaja.sifra as integer) = usklada_robe_stavke.roba_id where " +
+                                "usklada_robe.id_usklade = " + broj_dokumenta;
 
             sql_liste = sql_liste.Replace("+", "zbroj");
             if (classSQL.remoteConnectionString == "")
@@ -81,7 +70,7 @@ namespace PCPOS.Report.Uskladaskladista
             }
 
             string year = "";
-            DataTable DT = classSQL.select("SELECT datum FROM inventura WHERE broj_inventure='" + broj_dokumenta + "'", "inventura").Tables[0];
+            DataTable DT = classSQL.select("SELECT datum FROM usklada_robe WHERE id_usklade='" + broj_dokumenta + "'", "inventura").Tables[0];
 
             if (DT.Rows.Count > 0)
             {
@@ -94,18 +83,17 @@ namespace PCPOS.Report.Uskladaskladista
                 " 'Cijena' AS tbl3," +
                 " 'Kol.Kartice' AS tbl4," +
                 " 'Iznos.Kar' AS tbl5," +
-                " 'Kol.inv' AS tbl6," +
-                " 'Iznos inv' AS tbl7," +
+                " 'Trenutno stanje' AS tbl6," +
+                " 'Iznos usklade' AS tbl7," +
                 " 'Razlika' AS tbl8," +
                 " 'Iznos' AS tbl9," +
-                " inventura.datum AS datum1," +
-                " inventura.napomena AS komentar," +
-                " 'Skladište: '+skladiste.skladiste AS skladiste," +
+                " usklada_robe.datum AS datum1," +
+                " usklada_robe.napomena AS komentar," +
+                
                 " zaposlenici.ime + ' ' + zaposlenici.prezime AS string1," +
-                " CAST ('INVENTURA  ' AS nvarchar) + CAST (inventura.broj_inventure AS nvarchar) +'/'+ CAST (" + year + " AS nvarchar) AS naslov" +
-                " FROM inventura " +
-                " LEFT JOIN skladiste ON skladiste.id_skladiste=inventura.id_skladiste " +
-                " LEFT JOIN zaposlenici ON zaposlenici.id_zaposlenik=inventura.id_zaposlenik WHERE inventura.broj_inventure='" + broj_dokumenta + "'";
+                " CAST ('USKLADA SKLADIŠTA  ' AS nvarchar) + CAST (usklada_robe.id_usklade AS nvarchar) +'/'+ CAST (" + year + " AS nvarchar) AS naslov" +
+                " FROM usklada_robe " +
+                " LEFT JOIN zaposlenici ON zaposlenici.id_zaposlenik=usklada_robe.izradio WHERE usklada_robe.id_usklade='" + broj_dokumenta + "'";
             //" WHERE meduskladisnica.broj ='" + broj_dokumenta + "'";
 
             if (classSQL.remoteConnectionString == "")

@@ -85,6 +85,7 @@ namespace PCPOS
 
         private void EnterDGW(DataGridView d)
         {
+            /*
             if (d.CurrentCell.ColumnIndex == 4)
             {
                 d.CurrentCell = dgwArtikliUsklade.Rows[d.CurrentRow.Index].Cells[5];
@@ -96,10 +97,12 @@ namespace PCPOS
                 txtSifra_robe.Focus();
                 int curent = d.CurrentRow.Index;
             }
+            */
         }
 
         private void LeftDGW(DataGridView d)
         {
+            /*
             if (d.CurrentCell.ColumnIndex == 4)
             {
             }
@@ -108,10 +111,12 @@ namespace PCPOS
                 d.CurrentCell = dgwArtikliUsklade.Rows[d.CurrentRow.Index].Cells[4];
                 d.BeginEdit(true);
             }
+            */
         }
 
         private void RightDGW(DataGridView d)
         {
+            /*
             if (d.CurrentCell.ColumnIndex == 4)
             {
                 d.CurrentCell = dgwArtikliUsklade.Rows[d.CurrentRow.Index].Cells[5];
@@ -123,10 +128,12 @@ namespace PCPOS
                 txtSifra_robe.Text = "";
                 txtSifra_robe.Focus();
             }
+            */
         }
 
         private void UpDGW(DataGridView d)
         {
+            /*
             int curent = d.CurrentRow.Index;
             if (d.CurrentCell.ColumnIndex == 4)
             {
@@ -141,10 +148,12 @@ namespace PCPOS
                 d.CurrentCell = dgwArtikliUsklade.Rows[d.CurrentRow.Index - 1].Cells[4];
                 d.BeginEdit(true);
             }
+            */
         }
 
         private void DownDGW(DataGridView d)
         {
+            /*
             int curent = d.CurrentRow.Index;
             if (d.CurrentCell.ColumnIndex == 4)
             {
@@ -160,6 +169,7 @@ namespace PCPOS
                 d.CurrentCell = dgwArtikliUsklade.Rows[d.CurrentRow.Index + 1].Cells[4];
                 d.BeginEdit(true);
             }
+            */
         }
 
         private void ControlDisableEnable(int novi, int odustani, int spremi, int sve, int delAll)
@@ -729,7 +739,7 @@ namespace PCPOS
 
         private void fillInventura()
         {
-            string sql = "SELECT * FROM inventura WHERE broj_inventure='" + broj_inventure_edit + "'";
+            string sql = "SELECT * FROM usklada_robe WHERE id_usklade=" + broj_inventure_edit;
             DataTable DTinventura = classSQL.select(sql, "inventura").Tables[0];
             if (DTinventura.Rows.Count == 0)
                 return;
@@ -747,13 +757,6 @@ namespace PCPOS
                 MessageBox.Show("Nemate ovlaštenje uređivati ovaj dokumenat nakon " + br_days + " dana od izrade istog.");
                 return;
             }
-
-            if (DTinventura.Rows[0]["zakljucano"].ToString() == "1")
-            {
-                MessageBox.Show("Ova inventura je proknjižena, ne možete pristupati istoj.");
-                return;
-            }
-
             edit = true;
             dgwArtikliUsklade.Rows.Clear();
 
@@ -761,34 +764,35 @@ namespace PCPOS
             {
                 return;
             }
-
-            txtBrojInventure.Text = DTinventura.Rows[0]["broj_inventure"].ToString();
+            
+            txtBrojInventure.Text = DTinventura.Rows[0]["id_usklade"].ToString();
             nmGodinaInventure.Value = Convert.ToInt16(DTinventura.Rows[0]["godina"].ToString());
             dtpDatum.Value = Convert.ToDateTime(DTinventura.Rows[0]["datum"].ToString());
             rtbNapomena.Text = DTinventura.Rows[0]["napomena"].ToString();
-            cbSkladiste.SelectedValue = DTinventura.Rows[0]["id_skladiste"].ToString();
-            txtIzradio.Text = classSQL.select("SELECT ime+' '+prezime as Ime, id_zaposlenik  FROM zaposlenici WHERE id_zaposlenik='" + DTinventura.Rows[0]["id_zaposlenik"].ToString() + "'", "zaposlenici").Tables[0].Rows[0][0].ToString();
+            //cbSkladiste.SelectedValue = DTinventura.Rows[0]["id_skladiste"].ToString();
+            
+            txtIzradio.Text = classSQL.select("SELECT ime+' '+prezime as Ime, id_zaposlenik  FROM zaposlenici WHERE id_zaposlenik='" + DTinventura.Rows[0]["izradio"].ToString() + "'", "zaposlenici").Tables[0].Rows[0][0].ToString();
 
-            string sql1 = "SELECT * FROM inventura_stavke WHERE broj_inventure='" + broj_inventure_edit + "'";
+            string sql1 = "SELECT * FROM roba_prodaja join usklada_robe_stavke on cast(roba_prodaja.sifra as integer)=usklada_robe_stavke.roba_id join usklada_robe on usklada_robe.id_usklade=usklada_robe_stavke.usklada_id WHERE usklada_id='" + broj_inventure_edit + "'";
 
-            DataTable DTinventura_stavke = classSQL.select(sql1, "inventura_stavke").Tables[0];
+            DataTable DTusklada_stavke = classSQL.select(sql1, "inventura_stavke").Tables[0];
 
-            for (int br = 0; br < DTinventura_stavke.Rows.Count; br++)
+            for (int br = 0; br < DTusklada_stavke.Rows.Count; br++)
             {
                 dgwArtikliUsklade.Rows.Add();
 
                 dgwArtikliUsklade.Rows[br].Cells[0].Value = dgwArtikliUsklade.RowCount;
-                dgwArtikliUsklade.Rows[br].Cells["sifra"].Value = DTinventura_stavke.Rows[br]["sifra_robe"].ToString();
-                dgwArtikliUsklade.Rows[br].Cells["porez"].Value = DTinventura_stavke.Rows[br]["porez"].ToString();
-                dgwArtikliUsklade.Rows[br].Cells["naziv"].Value = DTinventura_stavke.Rows[br]["naziv"].ToString();
-                dgwArtikliUsklade.Rows[br].Cells["jmj"].Value = DTinventura_stavke.Rows[br]["jmj"].ToString();
-                dgwArtikliUsklade.Rows[br].Cells["kolicina"].Value = DTinventura_stavke.Rows[br]["kolicina"].ToString();
-                dgwArtikliUsklade.Rows[br].Cells["KolicinaNaSk"].Value = DTinventura_stavke.Rows[br]["kolicina_koja_je_bila_na_skl"].ToString();
-                dgwArtikliUsklade.Rows[br].Cells["id_stavka"].Value = DTinventura_stavke.Rows[br]["id_stavke"].ToString();
-                dgwArtikliUsklade.Rows[br].Cells["cijena"].Value = String.Format("{0:0.00}", Convert.ToDouble(DTinventura_stavke.Rows[br]["cijena"].ToString()));
-                dgwArtikliUsklade.Rows[br].Cells["iznos"].Value = String.Format("{0:0.00}", Convert.ToDouble(DTinventura_stavke.Rows[br]["cijena"].ToString()) * Convert.ToDouble(DTinventura_stavke.Rows[br]["kolicina"].ToString()));
-                dgwArtikliUsklade.Rows[br].Cells["mpc"].Value = DTinventura_stavke.Rows[br]["mpc"].ToString();
-                dgwArtikliUsklade.Rows[br].Cells["povratna_naknada"].Value = DTinventura_stavke.Rows[br]["povratna_naknada"].ToString();
+                dgwArtikliUsklade.Rows[br].Cells["sifra"].Value = DTusklada_stavke.Rows[br]["sifra"].ToString();
+                dgwArtikliUsklade.Rows[br].Cells["porez"].Value = DTusklada_stavke.Rows[br]["ulazni_porez"].ToString();
+                dgwArtikliUsklade.Rows[br].Cells["naziv"].Value = DTusklada_stavke.Rows[br]["naziv"].ToString();
+                dgwArtikliUsklade.Rows[br].Cells["jmj"].Value = DTusklada_stavke.Rows[br]["mjera"].ToString();
+                dgwArtikliUsklade.Rows[br].Cells["kolicina"].Value = DTusklada_stavke.Rows[br]["kolicina"].ToString();
+                dgwArtikliUsklade.Rows[br].Cells["KolicinaNaSk"].Value = DTusklada_stavke.Rows[br]["nova_kolicina"].ToString();
+                //dgwArtikliUsklade.Rows[br].Cells["id_stavka"].Value = DTinventura_stavke.Rows[br]["id_stavke"].ToString();
+                //dgwArtikliUsklade.Rows[br].Cells["cijena"].Value = String.Format("{0:0.00}", Convert.ToDouble(DTinventura_stavke.Rows[br]["cijena"].ToString()));
+                dgwArtikliUsklade.Rows[br].Cells["iznos"].Value = DTusklada_stavke.Rows[br]["nova_kolicina"].ToString();
+                dgwArtikliUsklade.Rows[br].Cells["mpc"].Value = DTusklada_stavke.Rows[br]["mpc"].ToString();
+                dgwArtikliUsklade.Rows[br].Cells["povratna_naknada"].Value = DTusklada_stavke.Rows[br]["povratna_naknada"].ToString();
             }
             PaintRows(dgwArtikliUsklade);
             ControlDisableEnable(0, 1, 1, 0, 1);
@@ -796,13 +800,14 @@ namespace PCPOS
 
         private void btnDeleteAll_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Dali ste sigurni da želite obrisai ovu inventuru?", "Upozorenje", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            if (MessageBox.Show("Dali ste sigurni da želite obrisai ovu uskladu robe" +
+                "?", "Upozorenje", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
-                classSQL.delete("DELETE FROM inventura_stavke WHERE broj_inventure='" + txtBrojInventure.Text + "'");
-                classSQL.delete("UPDATE inventura SET editirano='1',is_pocetno_stanje='0', obrisano = '1' WHERE broj_inventure='" + txtBrojInventure.Text + "'");
-                classSQL.insert("INSERT INTO aktivnost_zaposlenici (id_zaposlenik,datum,radnja) VALUES ('" + Properties.Settings.Default.id_zaposlenik + "','" + DateTime.Now.ToString("yyyy-MM-dd H:mm:ss") + "','Brisanje cijele inventure br." + txtBrojInventure.Text + "')");
+                classSQL.delete("DELETE FROM usklada_robe WHERE usklada_robe='" + txtBrojInventure.Text + "'");
+                classSQL.delete("UPDATE usklada_robe SET editirano='true', obrisano = '1' WHERE usklada_robe='" + txtBrojInventure.Text + "'");
+                classSQL.insert("INSERT INTO aktivnost_zaposlenici (id_zaposlenik,datum,radnja) VALUES ('" + Properties.Settings.Default.id_zaposlenik + "','" + DateTime.Now.ToString("yyyy-MM-dd H:mm:ss") + "','Brisanje cijele usklade robe br." + txtBrojInventure.Text + "')");
                 MessageBox.Show("Obrisano.");
-                provjera_sql(classSQL.insert("INSERT INTO aktivnost_zaposlenici (id_zaposlenik,datum,radnja) VALUES ('" + Properties.Settings.Default.id_zaposlenik + "','" + DateTime.Now.ToString("yyyy-MM-dd H:mm:ss") + "','Brisanje cijele inventure br." + txtBrojInventure.Text + "')"));
+                provjera_sql(classSQL.insert("INSERT INTO aktivnost_zaposlenici (id_zaposlenik,datum,radnja) VALUES ('" + Properties.Settings.Default.id_zaposlenik + "','" + DateTime.Now.ToString("yyyy-MM-dd H:mm:ss") + "','Brisanje cijele usklade robe br." + txtBrojInventure.Text + "')"));
 
                 edit = false;
                 EnableDisable(false);
@@ -814,7 +819,7 @@ namespace PCPOS
         {
             if (e.KeyCode == Keys.Enter)
             {
-                DataTable DT = classSQL.select("SELECT broj_inventure FROM inventura WHERE broj_inventure='" + txtBrojInventure.Text + "'", "inventura").Tables[0];
+                DataTable DT = classSQL.select("SELECT id_usklade FROM usklada_robe WHERE id_usklade='" + txtBrojInventure.Text + "'", "inventura").Tables[0];
                 deleteFields();
                 if (DT.Rows.Count == 0)
                 {
