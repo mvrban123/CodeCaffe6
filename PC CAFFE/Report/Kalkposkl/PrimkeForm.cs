@@ -32,10 +32,12 @@ namespace PCPOS.Report.Kalkposkl
 
         public string BrojFakOD { get; set; }
         public string BrojFakDO { get; set; }
+        public bool spremiPdf;
 
-        public PrimkeForm()
+        public PrimkeForm(bool spremiPdf=false)
         {
             InitializeComponent();
+            this.spremiPdf = spremiPdf;
         }
 
         private void PrimkeForm_Load(object sender, EventArgs e)
@@ -57,6 +59,21 @@ namespace PCPOS.Report.Kalkposkl
             this.reportViewer.LocalReport.ReportEmbeddedResource = "PCPOS.Report.Kalkposkl.Primke.rdlc";
             this.reportViewer.LocalReport.EnableExternalImages = true;
             this.reportViewer.RefreshReport();
+
+
+            if (spremiPdf)
+            {
+                Warning[] warnings;
+                string[] streamids;
+                string mimeType, encoding, extension;
+                byte[] bytes = reportViewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamids, out warnings);
+
+                string pdfPath = $@"C:\Users\Korisnik\Desktop\Primke." + extension; // navesti novu putanjju
+                System.IO.FileStream pdfFile = new System.IO.FileStream(pdfPath, System.IO.FileMode.Create);
+                pdfFile.Write(bytes, 0, bytes.Length);
+                pdfFile.Close();
+                this.Close();
+            }
         }
 
         private void LoadData()

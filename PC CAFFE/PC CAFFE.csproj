@@ -564,6 +564,12 @@
     <Compile Include="frmOtpremnicaUFakturu.designer.cs">
       <DependentUpon>frmOtpremnicaUFakturu.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPostavkeZaSlanjeDokumentacije.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPostavkeZaSlanjeDokumentacije.Designer.cs">
+      <DependentUpon>FrmPostavkeZaSlanjeDokumentacije.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSviDokumentiPotrosnogMaterijala.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1790,6 +1796,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmOtpremnicaUFakturu.resx">
       <DependentUpon>frmOtpremnicaUFakturu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPostavkeZaSlanjeDokumentacije.resx">
+      <DependentUpon>FrmPostavkeZaSlanjeDokumentacije.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSviDokumentiPotrosnogMaterijala.resx">
       <DependentUpon>frmSviDokumentiPotrosnogMaterijala.cs</DependentUpon>
