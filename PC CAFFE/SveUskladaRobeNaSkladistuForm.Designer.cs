@@ -48,7 +48,7 @@
             // 
             // btnSveFakture
             // 
-            this.btnSveFakture.BackColor = System.Drawing.Color.White;
+            this.btnSveFakture.BackColor = System.Drawing.Color.Gainsboro;
             this.btnSveFakture.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(53)))), ((int)(((byte)(79)))));
             this.btnSveFakture.FlatAppearance.CheckedBackColor = System.Drawing.Color.Gainsboro;
             this.btnSveFakture.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
@@ -59,23 +59,24 @@
             this.btnSveFakture.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSveFakture.Location = new System.Drawing.Point(13, 12);
             this.btnSveFakture.Name = "btnSveFakture";
-            this.btnSveFakture.Size = new System.Drawing.Size(144, 40);
+            this.btnSveFakture.Size = new System.Drawing.Size(181, 40);
             this.btnSveFakture.TabIndex = 23;
-            this.btnSveFakture.Text = "Ispis inventure";
+            this.btnSveFakture.Text = "Ispis usklade robe";
             this.btnSveFakture.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSveFakture.UseVisualStyleBackColor = false;
+            this.btnSveFakture.Click += new System.EventHandler(this.btnSveFakture_Click);
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(53)))), ((int)(((byte)(79)))));
+            this.button1.BackColor = System.Drawing.Color.Gainsboro;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button1.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlDark;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Image = global::PCPOS.Properties.Resources.Actions_application_exit_icon;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.Location = new System.Drawing.Point(681, 12);
@@ -91,6 +92,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SlateGray;
             this.ClientSize = new System.Drawing.Size(828, 549);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnSveFakture);

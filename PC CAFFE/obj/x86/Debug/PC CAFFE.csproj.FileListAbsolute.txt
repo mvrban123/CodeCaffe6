@@ -5577,3 +5577,4 @@ C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\it\PC POS.resourc
 C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\PC CAFFE.csproj.CopyComplete
 C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\PC POS.exe
 C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\PC POS.pdb
+C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\PCPOS.Report.Uskladaskladista.UskladaSkladistaReportForm.resources
