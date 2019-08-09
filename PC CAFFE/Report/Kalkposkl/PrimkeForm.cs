@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,15 +64,7 @@ namespace PCPOS.Report.Kalkposkl
 
             if (spremiPdf)
             {
-                Warning[] warnings;
-                string[] streamids;
-                string mimeType, encoding, extension;
-                byte[] bytes = reportViewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamids, out warnings);
-
-                string pdfPath = $@"C:\Users\Korisnik\Desktop\Primke." + extension; // navesti novu putanjju
-                System.IO.FileStream pdfFile = new System.IO.FileStream(pdfPath, System.IO.FileMode.Create);
-                pdfFile.Write(bytes, 0, bytes.Length);
-                pdfFile.Close();
+                Global.GlobalFunctions.SpremiPdf("Primke", reportViewer);
                 this.Close();
             }
         }

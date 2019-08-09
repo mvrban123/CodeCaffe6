@@ -23,10 +23,13 @@ namespace PCPOS.Report.GrupeProizvoda
         decimal porez = 0;
         decimal pnp = 0;
 
-        public ReportObracunGrupe()
+        bool spremiPdf = false;
+
+        public ReportObracunGrupe(bool spremiPdf = false)
         {
             InitializeComponent();
             this.Controls.Add(this.reportViewer);
+            this.spremiPdf = spremiPdf;
         }
 
         private void ReportObracunGrupe_Load(object sender, EventArgs e)
@@ -50,6 +53,12 @@ namespace PCPOS.Report.GrupeProizvoda
             this.reportViewer.LocalReport.ReportEmbeddedResource = "PCPOS.Report.GrupeProizvoda.ObracunGrupeProizvoda.rdlc";
             this.reportViewer.LocalReport.EnableExternalImages = true;
             this.reportViewer.RefreshReport();
+
+            if (spremiPdf)
+            {
+                Global.GlobalFunctions.SpremiPdf("ObracunPoGrupamaProizvoda", reportViewer);
+                this.Close();
+            }
         }
 
         /// <summary>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,10 +16,12 @@ namespace PCPOS.Report.Kalkposkl
     {
         public DateTime datumOD { get; set; }
         public DateTime datumDO { get; set; }
+        private bool spremiPdf;
 
-        public FaktureForm()
+        public FaktureForm(bool spremiPdf=false)
         {
             InitializeComponent();
+            this.spremiPdf = spremiPdf;
         }
 
         private void FaktureForm_Load(object sender, EventArgs e)
@@ -47,6 +50,12 @@ namespace PCPOS.Report.Kalkposkl
             this.reportViewer.LocalReport.ReportEmbeddedResource = "PCPOS.Report.Kalkposkl.Fakture.rdlc";
             this.reportViewer.LocalReport.EnableExternalImages = true;
             this.reportViewer.RefreshReport();
+
+            if (spremiPdf)
+            {
+                Global.GlobalFunctions.SpremiPdf("Fakture", reportViewer);
+                this.Close();
+            }
         }
 
         /// <summary>

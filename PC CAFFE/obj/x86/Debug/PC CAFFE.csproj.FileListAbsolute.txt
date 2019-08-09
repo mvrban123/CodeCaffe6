@@ -5833,3 +5833,4 @@ C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\PC CAFFE.csproj.C
 C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\PC POS.exe
 C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\PC POS.pdb
 >>>>>>> d1c7c61bf2f73952e180693d0c0eda4d0a3154f1
+C:\Users\Korisnik\Desktop\Caffe6\PC CAFFE\obj\x86\Debug\PCPOS.Report.Uskladaskladista.UskladaSkladistaReportForm.resources

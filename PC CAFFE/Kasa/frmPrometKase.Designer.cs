@@ -131,7 +131,7 @@
             // 
             // dtpDO
             // 
-            this.dtpDO.CustomFormat = "dd.MM.yyyy";
+            this.dtpDO.CustomFormat = "dd/MM/yyyy";
             this.dtpDO.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDO.Location = new System.Drawing.Point(57, 89);
             this.dtpDO.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -152,7 +152,7 @@
             // 
             // dtpOD
             // 
-            this.dtpOD.CustomFormat = "dd.MM.yyyy";
+            this.dtpOD.CustomFormat = "dd/MM/yyyy";
             this.dtpOD.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpOD.Location = new System.Drawing.Point(55, 41);
             this.dtpOD.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -208,7 +208,7 @@
             this.btnIspis.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
             this.btnIspis.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlDark;
             this.btnIspis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIspis.Font = new System.Drawing.Font("Arial Narrow", 11F);
+            this.btnIspis.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.btnIspis.Location = new System.Drawing.Point(54, 282);
             this.btnIspis.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnIspis.Name = "btnIspis";

@@ -6,14 +6,43 @@ namespace PCPOS.Caffe
 {
     public partial class frmProdajnaRoba : Form
     {
-        public frmProdajnaRoba()
+        private bool SlanjeDokumenta;
+        private string Nacin;
+        private DateTime PocetniDatum;
+        private DateTime ZavrsniDatum;
+
+        public frmProdajnaRoba(bool slanjeDokumenta = false, string nacin = null, DateTime? pocetniDatum = null, DateTime? zavrsniDatum = null)
         {
             InitializeComponent();
+
+            if (slanjeDokumenta)
+            {
+                SlanjeDokumenta = slanjeDokumenta;
+                Nacin = nacin;
+                PocetniDatum = Global.GlobalFunctions.GenerirajDatumSVremenom(Convert.ToDateTime(pocetniDatum), 0, 0, 1);
+                ZavrsniDatum = Global.GlobalFunctions.GenerirajDatumSVremenom(Convert.ToDateTime(zavrsniDatum), 23, 59, 59);
+            }
         }
 
         private void frmProdajnaRoba_Load(object sender, EventArgs e)
         {
             SetCB();
+
+            if (SlanjeDokumenta)
+            {
+                if (Nacin == "Pice" || Nacin == "Hrana" || Nacin=="TrgRoba")
+                    chbPodgrupa.Checked = true;
+
+                Report.Liste.frmListe formListe = new Report.Liste.frmListe(true, Nacin); // true, pice/hrana/trgovackaroba/ukupno
+                formListe.datumOD = PocetniDatum;
+                formListe.datumDO = ZavrsniDatum;
+                formListe.ImeForme = "Promet po robi";
+                formListe.dokumenat = "PrometRobe";
+                if (chbPodgrupa.Checked)
+                    formListe.id_podgrupa = cbPodgrupa.SelectedValue.ToString();
+                formListe.ShowDialog();
+                this.Close();
+            }
         }
 
         private DataTable DT_Zaposlenik;
