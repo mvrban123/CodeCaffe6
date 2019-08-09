@@ -43,7 +43,7 @@ namespace PCPOS
                 dgw.Columns[5].ReadOnly = true;
             }
 
-            this.Paint += new PaintEventHandler(Class.Postavke.changeBackground);
+            //this.Paint += new PaintEventHandler(Class.Postavke.changeBackground);
         }
 
         //void Form1_Paint (object sender, PaintEventArgs e) {
@@ -916,7 +916,7 @@ namespace PCPOS
 
         private void frmUnosInventura_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.Paint += new PaintEventHandler(Class.Postavke.changeBackground);
+            //this.Paint += new PaintEventHandler(Class.Postavke.changeBackground);
             Until.FunkcijeRobno robno = new Until.FunkcijeRobno();
             robno.PostaviStanjeSkladista();
             try
@@ -1037,7 +1037,7 @@ namespace PCPOS
             this.Focus();
             this.BringToFront();
             this.TopMost = false;
-            this.Paint += new PaintEventHandler(Class.Postavke.changeBackground);
+            //this.Paint += new PaintEventHandler(Class.Postavke.changeBackground);
         }
 
         private void bgSinkronizacija_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

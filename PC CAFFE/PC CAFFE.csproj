@@ -1587,7 +1587,9 @@
     <Compile Include="UskladaSkladistaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UskladaSkladistaForm.Designer.cs" />
+    <Compile Include="UskladaSkladistaForm.Designer.cs">
+      <DependentUpon>UskladaSkladistaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="variable.cs" />
     <Compile Include="weather.cs" />
     <Compile Include="Web References\pc1\Reference.cs">
@@ -2288,7 +2290,9 @@
     <EmbeddedResource Include="Until\frmUvozArtiklaCSV.resx">
       <DependentUpon>frmUvozArtiklaCSV.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UskladaSkladistaForm.resx" />
+    <EmbeddedResource Include="UskladaSkladistaForm.resx">
+      <DependentUpon>UskladaSkladistaForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="app.manifest" />
     <None Include="DataSet1.xsc">
