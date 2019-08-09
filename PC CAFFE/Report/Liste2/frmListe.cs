@@ -6,9 +6,12 @@ namespace PCPOS.Report.Liste2
 {
     public partial class frmListe : Form
     {
-        public frmListe()
+        private bool spremiPdf;
+
+        public frmListe(bool spremiPdf=false)
         {
             InitializeComponent();
+            this.spremiPdf = spremiPdf;
         }
 
         public string broj_dokumenta { get; set; }
@@ -30,6 +33,12 @@ namespace PCPOS.Report.Liste2
                 this.Text = ImeForme;
             }
             this.reportViewer1.RefreshReport();
+
+            if (spremiPdf)
+            {
+                Global.GlobalFunctions.SpremiPdf("PrometKase", reportViewer1);
+                this.Close();
+            }
         }
 
         private void PrometKase()

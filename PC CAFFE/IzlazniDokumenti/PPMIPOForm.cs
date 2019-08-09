@@ -15,13 +15,37 @@ namespace PCPOS.IzlazniDokumenti
     {
         public DateTime datumOd { get; set; }
         public DateTime datumDo { get; set; }
+        private bool SlanjeDokumenta;
+        private DateTime PocetniDatum;
+        private DateTime ZavrsniDatum;
 
         DataTable DTpnp = new DataTable();
 
-        public PPMIPOForm()
+        public PPMIPOForm(bool slanjeDokumenata=false, DateTime? pocetniDatum=null, DateTime? zavrsniDatum=null)
         {
             InitializeComponent();
             LoadDucan();
+
+            if (slanjeDokumenata)
+            {
+                SlanjeDokumenta = slanjeDokumenata;
+                PocetniDatum = Global.GlobalFunctions.GenerirajDatumSVremenom(Convert.ToDateTime(pocetniDatum),0,0,1);
+                ZavrsniDatum = Global.GlobalFunctions.GenerirajDatumSVremenom(Convert.ToDateTime(zavrsniDatum), 23, 59, 59);
+
+            }
+        }
+
+        private void PPMIPOForm_Load(object sender, EventArgs e)
+        {
+            if (SlanjeDokumenta)
+            {
+                Report.PPMIPO.PnpReportForm form = new Report.PPMIPO.PnpReportForm(true);
+                form.datumOd = PocetniDatum;
+                form.datumDo = ZavrsniDatum;
+                form.idDucan = cbDucan.SelectedValue.ToString();
+                form.ShowDialog();
+                this.Close();
+            }
         }
 
         private void LoadDucan()
@@ -30,6 +54,8 @@ namespace PCPOS.IzlazniDokumenti
             cbDucan.DisplayMember = "ime_ducana";
             cbDucan.ValueMember = "id_ducan";
             cbDucan.DataSource = DTducan;
+
+
         }
 
         private void LoadCompanyData()
@@ -85,6 +111,8 @@ namespace PCPOS.IzlazniDokumenti
             form.datumDo = dtpDatumDo.Value.Date;
             form.idDucan = cbDucan.SelectedValue.ToString();
             form.ShowDialog();
+            if (SlanjeDokumenta)
+                this.Close();
         }
 
         private void btnXML_Click(object sender, EventArgs e)
@@ -160,5 +188,6 @@ namespace PCPOS.IzlazniDokumenti
                 File.WriteAllText(path, text);
             }
         }
+
     }
 }

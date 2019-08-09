@@ -113,7 +113,7 @@
             // 
             // dtpDO
             // 
-            this.dtpDO.CustomFormat = "dd.MM.yyyy   H:mm";
+            this.dtpDO.CustomFormat = "dd/MM/yyyy";
             this.dtpDO.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDO.Location = new System.Drawing.Point(32, 87);
             this.dtpDO.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -134,7 +134,7 @@
             // 
             // dtpOD
             // 
-            this.dtpOD.CustomFormat = "dd.MM.yyyy   H:mm";
+            this.dtpOD.CustomFormat = "dd/MM/yyyy";
             this.dtpOD.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpOD.Location = new System.Drawing.Point(30, 38);
             this.dtpOD.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);

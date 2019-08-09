@@ -6,9 +6,20 @@ namespace PCPOS.Report.PrometiPoDanima
 {
     public partial class frmIspisProdajnihArtiklaPoDanima : Form
     {
-        public frmIspisProdajnihArtiklaPoDanima()
+        bool SlanjeDokumenata;
+        DateTime PocetniDatum;
+        DateTime ZavrsniDatum;
+
+        public frmIspisProdajnihArtiklaPoDanima(bool slanjeDokumenata=false, DateTime? pocetniDatum=null,DateTime? konacniDatum=null)
         {
             InitializeComponent();
+
+            if (slanjeDokumenata)
+            {
+                SlanjeDokumenata = slanjeDokumenata;
+                PocetniDatum = Global.GlobalFunctions.GenerirajDatumSVremenom(Convert.ToDateTime(pocetniDatum), 0, 0, 1);
+                ZavrsniDatum = Global.GlobalFunctions.GenerirajDatumSVremenom(Convert.ToDateTime(konacniDatum), 0, 0, 1);
+            }
         }
 
         private void frmIspisProdajnihArtiklaNaMaliPrinter_Load(object sender, EventArgs e)
@@ -16,7 +27,15 @@ namespace PCPOS.Report.PrometiPoDanima
             dtpOD.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
             dtpDO.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59);
             SetCB();
-            //this.Paint += new PaintEventHandler(Form1_Paint);
+
+            if (SlanjeDokumenata)
+            {
+                Report.PrometiPoDanima.frmListePoDanima form = new Report.PrometiPoDanima.frmListePoDanima(true);
+                form.datumOD = PocetniDatum;
+                form.datumDO = ZavrsniDatum;
+                form.ShowDialog();
+                this.Close();
+            }
         }
 
         //void Form1_Paint (object sender, PaintEventArgs e) {

@@ -6,15 +6,37 @@ namespace PCPOS.Kasa
 {
     public partial class frmPrometKase : Form
     {
-        public frmPrometKase()
+        bool SlanjeDokumenata;
+        DateTime PocetniDatum;
+        DateTime ZavrsniDatum;
+
+        public frmPrometKase(bool slanjeDokumenata=false,DateTime? pocetniDatum=null,DateTime? zavrsniDatum=null)
         {
             InitializeComponent();
+
+            if (slanjeDokumenata)
+            {
+                SlanjeDokumenata = slanjeDokumenata;
+                PocetniDatum = Global.GlobalFunctions.GenerirajDatumSVremenom(Convert.ToDateTime(pocetniDatum), 0, 0, 1);
+                ZavrsniDatum = Global.GlobalFunctions.GenerirajDatumSVremenom(Convert.ToDateTime(zavrsniDatum), 23, 59, 59);
+            }
         }
 
         private void frmPrometKase_Load(object sender, EventArgs e)
         {
             SetCB();
             //this.Paint += new PaintEventHandler(Form1_Paint);
+
+            if (SlanjeDokumenata)
+            {
+                Report.Liste2.frmListe formListe = new Report.Liste2.frmListe(true);
+                formListe.datumOD = PocetniDatum;
+                formListe.datumDO = ZavrsniDatum;
+                formListe.ImeForme = "Promet kase";
+                formListe.dokumenat = "PROMET";
+                formListe.ShowDialog();
+                this.Close();
+            }
         }
 
         //void Form1_Paint (object sender, PaintEventArgs e) {

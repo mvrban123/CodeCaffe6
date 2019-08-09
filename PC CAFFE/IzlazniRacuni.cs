@@ -22,10 +22,14 @@ namespace PCPOS
         public IzlazniRacuni(bool slanjeDokumentacije = false,string cmbIme=null,DateTime? pocetniDatum = null, DateTime? zavrsniDatum = null)
         {
             InitializeComponent();
-            this.slanjeDokumentacije = slanjeDokumentacije;
-            this.cmbIme = cmbIme;
-            this.pocetniDatum = pocetniDatum;
-            this.zavrsniDatum = zavrsniDatum;
+
+            if (slanjeDokumentacije)
+            {
+                this.slanjeDokumentacije = slanjeDokumentacije;
+                this.cmbIme = cmbIme;
+                this.pocetniDatum = pocetniDatum;
+                this.zavrsniDatum = zavrsniDatum;
+            }
         }
 
         private void IzlazniRacuni_Load(object sender, EventArgs e)
@@ -39,8 +43,8 @@ namespace PCPOS
 
                 cbDatum.Checked = true;
                 cmbDokument.SelectedValue = cmbIme;
-                dtpOdDatuma.Value = Convert.ToDateTime(pocetniDatum);
-                dtpDoDatuma.Value = Convert.ToDateTime(zavrsniDatum);
+                dtpOdDatuma.Value = PocetniDatum;
+                dtpDoDatuma.Value = ZavrsniDatum;
                 btnIspis.PerformClick();
             }
         }
@@ -169,25 +173,28 @@ namespace PCPOS
             if (cbDatum.Checked)
             {
                 if (cmbDokument.SelectedValue.ToString() == "fakt")
-                {
-                    Report.Kalkposkl.FaktureForm faktureForm = new Report.Kalkposkl.FaktureForm();
+                { 
+                    Report.Kalkposkl.FaktureForm faktureForm = new Report.Kalkposkl.FaktureForm(slanjeDokumentacije);
                     faktureForm.datumOD = dtpOdDatuma.Value.Date;
                     faktureForm.datumDO = dtpDoDatuma.Value.Date;
                     faktureForm.ShowDialog();
+                    if(slanjeDokumentacije)
+                        this.Close();
                 }
 
                 if (cmbDokument.SelectedValue.ToString() == "kalk")
                 {
-                    Report.Kalkposkl.KalkulacijeForm kalkulacijeForm = new Report.Kalkposkl.KalkulacijeForm(true);
+                    Report.Kalkposkl.KalkulacijeForm kalkulacijeForm = new Report.Kalkposkl.KalkulacijeForm(slanjeDokumentacije);
                     kalkulacijeForm.datumOD = dtpOdDatuma.Value.Date;
                     kalkulacijeForm.datumDO = dtpDoDatuma.Value.Date;
                     kalkulacijeForm.ShowDialog();
-                    this.Close();
+                    if (slanjeDokumentacije)
+                        this.Close();
                 }
 
                 if (cmbDokument.SelectedValue.ToString() == "prim")
                 {
-                    Report.Kalkposkl.PrimkeForm primkeForm = new Report.Kalkposkl.PrimkeForm(true);
+                    Report.Kalkposkl.PrimkeForm primkeForm = new Report.Kalkposkl.PrimkeForm(slanjeDokumentacije);
                     primkeForm.BrojFakDO = tbDoRacuna.Text;
                     primkeForm.documenat = cmbDokument.SelectedValue.ToString();
                     primkeForm.prema_rac = cbBrojevi.Checked;
@@ -198,7 +205,8 @@ namespace PCPOS
                     primkeForm.datumOD = dtpOdDatuma.Value.Date;
                     primkeForm.datumDO = dtpDoDatuma.Value.Date;
                     primkeForm.ShowDialog();
-                    this.Close();
+                    if (slanjeDokumentacije)
+                        this.Close();
                 }
             }
         }

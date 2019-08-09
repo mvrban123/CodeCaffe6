@@ -34,6 +34,7 @@ namespace PCPOS
 
         private void btnSveFakture_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             Report.Uskladaskladista.UskladaSkladistaReportForm uskladaSkladistaReport = new Report.Uskladaskladista.UskladaSkladistaReportForm();
             uskladaSkladistaReport.broj_dokumenta = int.Parse(sveUskladeView.CurrentRow.Cells[0].FormattedValue.ToString());
             //aa.skladiste = int.Parse(sveUskladeView.CurrentRow.Cells["id_skladiste"].FormattedValue.ToString());
@@ -67,6 +68,12 @@ namespace PCPOS
                 this.Close();
                 urediUskladu.Show();
             }
+=======
+            Report.Uskladaskladista.UskladaSkladistaReportForm aa = new Report.Uskladaskladista.UskladaSkladistaReportForm();
+            aa.broj_dokumenta = int.Parse(sveUskladeView.CurrentRow.Cells[0].FormattedValue.ToString());
+            //aa.skladiste = int.Parse(sveUskladeView.CurrentRow.Cells["id_skladiste"].FormattedValue.ToString());
+            aa.ShowDialog();
+>>>>>>> 82a23310b22e96ea7081222cad1455ff214100bc
         }
     }
 }
