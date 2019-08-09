@@ -5832,12 +5832,8 @@ C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\it\PC POS.resourc
 C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\PC CAFFE.csproj.CopyComplete
 C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\PC POS.exe
 C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\PC POS.pdb
-<<<<<<< HEAD
 C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\PCPOS.Report.Uskladaskladista.UskladaSkladistaReportForm.resources
-=======
 >>>>>>> d1c7c61bf2f73952e180693d0c0eda4d0a3154f1
-<<<<<<< HEAD
 C:\Users\Korisnik\Desktop\Caffe6\PC CAFFE\obj\x86\Debug\PCPOS.Report.Uskladaskladista.UskladaSkladistaReportForm.resources
-=======
 >>>>>>> b9de224eb5271badb0321ba9b993b2dd078ef15b
 >>>>>>> 0b7f527be9f5183cb7042e5af30e84f372cb66d3
