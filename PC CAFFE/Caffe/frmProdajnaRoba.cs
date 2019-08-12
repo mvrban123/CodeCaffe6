@@ -39,7 +39,20 @@ namespace PCPOS.Caffe
                 formListe.ImeForme = "Promet po robi";
                 formListe.dokumenat = "PrometRobe";
                 if (chbPodgrupa.Checked)
-                    formListe.id_podgrupa = cbPodgrupa.SelectedValue.ToString();
+                {
+                    switch (Nacin) // Hard codeano zato sto Dejan veli da je 1 uvijek pice, 2 je hrana, a 3 je trgovacka roba
+                    {
+                        case "Pice":
+                            formListe.id_podgrupa = "1";
+                            break;
+                        case "Hrana":
+                            formListe.id_podgrupa="2";
+                            break;
+                        default:
+                            formListe.id_podgrupa="3";
+                            break;
+                    }
+                }
                 formListe.ShowDialog();
                 this.Close();
             }

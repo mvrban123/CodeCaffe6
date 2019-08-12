@@ -591,6 +591,17 @@
     <Compile Include="frmPotrosniMaterijal.designer.cs">
       <DependentUpon>frmPotrosniMaterijal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\Izdatnica\IzdatnicaDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IzdatnicaDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\Izdatnica\ReportIzdatnica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\Izdatnica\ReportIzdatnica.Designer.cs">
+      <DependentUpon>ReportIzdatnica.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\NaruzdbeNaStolu\FrmNarudzbeNaStolu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1850,6 +1861,9 @@
     <EmbeddedResource Include="frmSinkronizacija.resx">
       <DependentUpon>frmSinkronizacija.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\Izdatnica\ReportIzdatnica.resx">
+      <DependentUpon>ReportIzdatnica.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\NaruzdbeNaStolu\FrmNarudzbeNaStolu.resx">
       <DependentUpon>FrmNarudzbeNaStolu.cs</DependentUpon>
     </EmbeddedResource>
@@ -2435,6 +2449,17 @@
       <DependentUpon>DSuskladenje.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Report\Izdatnica\IzdatnicaDataSet.xsc">
+      <DependentUpon>IzdatnicaDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Report\Izdatnica\IzdatnicaDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>IzdatnicaDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Report\Izdatnica\IzdatnicaDataSet.xss">
+      <DependentUpon>IzdatnicaDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Report\NaruzdbeNaStolu\NarudzbeNaStoluDataSet.xsc">
       <DependentUpon>NarudzbeNaStoluDataSet.xsd</DependentUpon>
     </None>
