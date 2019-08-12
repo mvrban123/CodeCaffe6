@@ -208,21 +208,6 @@ namespace PCPOS
             }
         }
 
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                int br = e.RowIndex;
-                string id = dataGridView2.Rows[br].Cells[0].FormattedValue.ToString();
-                Properties.Settings.Default.id_roba = id;
-                Properties.Settings.Default.Save();
-                this.Close();
-            }
-            catch (Exception)
-            {
-            }
-        }
-
         private void CBset()
         {
             //CB grupe

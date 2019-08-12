@@ -287,6 +287,7 @@ namespace PCPOS.Class
 
         public static void changeBackground(object sender, PaintEventArgs e)
         {
+            
             try
             {
                 int widthForm = (sender as Form).ClientRectangle.Width;
@@ -312,6 +313,7 @@ namespace PCPOS.Class
             {
                 MessageBox.Show(ex.Message);
             }
+            
         }
 
         private static Image SetImageOpacity(Image image, float opacity)
