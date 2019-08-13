@@ -208,6 +208,17 @@ namespace PCPOS
                     if (slanjeDokumentacije)
                         this.Close();
                 }
+
+                //Napravljeno samo za datume
+                if (cmbDokument.SelectedValue.ToString() == "izd")
+                {
+                    Report.Izdatnica.FormIzdatnicaReport formIzdatnicaReport = new Report.Izdatnica.FormIzdatnicaReport(slanjeDokumentacije);
+                    formIzdatnicaReport.datumOD = dtpOdDatuma.Value.Date;
+                    formIzdatnicaReport.datumDO = dtpDoDatuma.Value.Date;
+                    formIzdatnicaReport.ShowDialog();
+                    if (slanjeDokumentacije)
+                        this.Close();
+                }
             }
         }
     }

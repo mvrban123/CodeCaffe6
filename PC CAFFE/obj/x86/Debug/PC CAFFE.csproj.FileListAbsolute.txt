@@ -5836,8 +5836,7 @@ C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\PCPOS.Report.Uskl
 >>>>>>> d1c7c61bf2f73952e180693d0c0eda4d0a3154f1
 C:\Users\Korisnik\Desktop\Caffe6\PC CAFFE\obj\x86\Debug\PCPOS.Report.Uskladaskladista.UskladaSkladistaReportForm.resources
 >>>>>>> b9de224eb5271badb0321ba9b993b2dd078ef15b
-<<<<<<< HEAD
 C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\PCPOS.FrmPostavkeZaSlanjeDokumentacije.resources
-=======
 >>>>>>> 0b7f527be9f5183cb7042e5af30e84f372cb66d3
 >>>>>>> 82a23310b22e96ea7081222cad1455ff214100bc
+C:\Users\Korisnik\Desktop\Caffe6\PC CAFFE\obj\x86\Debug\PCPOS.Report.Izdatnica.FormIzdatnicaReport.resources

@@ -96,10 +96,11 @@ namespace PCPOS
                 IzlazniRacuni frmIzlazniRacuni = new IzlazniRacuni(true, "fakt", dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
                 frmIzlazniRacuni.ShowDialog();
             }
-            //Izdatnice ? 
+            //Izdatnice
             if (checkBoxIzdatnice.Checked)
             {
-                //Dejan: "Jos nije napravljeno"
+                IzlazniRacuni frmIzlazniRacuni = new IzlazniRacuni(true, "izd", dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
+                frmIzlazniRacuni.ShowDialog();
             }
             //Otpis robe ?
             if (checkBoxOtpisRobe.Checked)

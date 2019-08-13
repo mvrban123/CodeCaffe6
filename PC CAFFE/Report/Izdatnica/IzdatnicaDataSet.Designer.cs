@@ -287,6 +287,10 @@ namespace PCPOS.Report.Izdatnica {
             
             private global::System.Data.DataColumn columnIznos;
             
+            private global::System.Data.DataColumn columnDatumOd;
+            
+            private global::System.Data.DataColumn columnDatumDo;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public DataTableIzdatnicaDataTable() {
@@ -354,6 +358,22 @@ namespace PCPOS.Report.Izdatnica {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DatumOdColumn {
+                get {
+                    return this.columnDatumOd;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DatumDoColumn {
+                get {
+                    return this.columnDatumDo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -389,13 +409,15 @@ namespace PCPOS.Report.Izdatnica {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTableIzdatnicaRow AddDataTableIzdatnicaRow(int ID_Izdatnica, string Datum, string Partner, string Iznos) {
+            public DataTableIzdatnicaRow AddDataTableIzdatnicaRow(int ID_Izdatnica, string Datum, string Partner, string Iznos, string DatumOd, string DatumDo) {
                 DataTableIzdatnicaRow rowDataTableIzdatnicaRow = ((DataTableIzdatnicaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ID_Izdatnica,
                         Datum,
                         Partner,
-                        Iznos};
+                        Iznos,
+                        DatumOd,
+                        DatumDo};
                 rowDataTableIzdatnicaRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTableIzdatnicaRow);
                 return rowDataTableIzdatnicaRow;
@@ -422,6 +444,8 @@ namespace PCPOS.Report.Izdatnica {
                 this.columnDatum = base.Columns["Datum"];
                 this.columnPartner = base.Columns["Partner"];
                 this.columnIznos = base.Columns["Iznos"];
+                this.columnDatumOd = base.Columns["DatumOd"];
+                this.columnDatumDo = base.Columns["DatumDo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -435,6 +459,10 @@ namespace PCPOS.Report.Izdatnica {
                 base.Columns.Add(this.columnPartner);
                 this.columnIznos = new global::System.Data.DataColumn("Iznos", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIznos);
+                this.columnDatumOd = new global::System.Data.DataColumn("DatumOd", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDatumOd);
+                this.columnDatumDo = new global::System.Data.DataColumn("DatumDo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDatumDo);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -641,6 +669,38 @@ namespace PCPOS.Report.Izdatnica {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DatumOd {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTableIzdatnica.DatumOdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DatumOd\' in table \'DataTableIzdatnica\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTableIzdatnica.DatumOdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DatumDo {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTableIzdatnica.DatumDoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DatumDo\' in table \'DataTableIzdatnica\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTableIzdatnica.DatumDoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsID_IzdatnicaNull() {
                 return this.IsNull(this.tableDataTableIzdatnica.ID_IzdatnicaColumn);
             }
@@ -685,6 +745,30 @@ namespace PCPOS.Report.Izdatnica {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetIznosNull() {
                 this[this.tableDataTableIzdatnica.IznosColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDatumOdNull() {
+                return this.IsNull(this.tableDataTableIzdatnica.DatumOdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDatumOdNull() {
+                this[this.tableDataTableIzdatnica.DatumOdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDatumDoNull() {
+                return this.IsNull(this.tableDataTableIzdatnica.DatumDoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDatumDoNull() {
+                this[this.tableDataTableIzdatnica.DatumDoColumn] = global::System.Convert.DBNull;
             }
         }
         

@@ -534,5 +534,11 @@ ORDER BY izdatnica.datum DESC{1}",
                 return cp;
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            PCPOS.Report.Izdatnica.FormIzdatnicaReport IzdatnicaReport = new PCPOS.Report.Izdatnica.FormIzdatnicaReport();
+            IzdatnicaReport.ShowDialog();
+        }
     }
 }
