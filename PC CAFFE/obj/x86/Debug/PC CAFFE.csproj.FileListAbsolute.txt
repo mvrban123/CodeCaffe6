@@ -5841,3 +5841,5 @@ C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\PCPOS.FrmPostavke
 >>>>>>> 82a23310b22e96ea7081222cad1455ff214100bc
 C:\Users\Korisnik\Desktop\Caffe6\PC CAFFE\obj\x86\Debug\PCPOS.Report.Izdatnica.FormIzdatnicaReport.resources
 C:\Users\Korisnik\Desktop\Caffe6\PC CAFFE\obj\x86\Debug\PCPOS.Report.OtpisRobe.FormOtpisRobeReport.resources
+C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\PCPOS.Report.Izdatnica.FormIzdatnicaReport.resources
+C:\Users\Marko Vrban\Desktop\CodeCaffe6\PC CAFFE\obj\x86\Debug\PCPOS.Report.OtpisRobe.FormOtpisRobeReport.resources
