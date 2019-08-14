@@ -142,7 +142,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Iznos</Value>
+                              <Value>Iznos(NBC)</Value>
                               <Style>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -283,7 +283,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Iznos.Value</Value>
+                              <Value>=FormatNumber(Fields!Iznos.Value,2)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -332,7 +332,7 @@
         <DataSetName>DataSetIzdatnica</DataSetName>
         <Top>1.97916in</Top>
         <Left>0.41666in</Left>
-        <Height>0.48959in</Height>
+        <Height>0.4896in</Height>
         <Width>7.58334in</Width>
         <Style>
           <Border>
@@ -787,8 +787,72 @@
           <VerticalAlign>Middle</VerticalAlign>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox2">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=FormatNumber(Sum(Fields!Iznos.Value, "DataSetIzdatnica"),2)</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox2</rd:DefaultName>
+        <Top>6.44704cm</Top>
+        <Left>17.07664cm</Left>
+        <Height>0.5588cm</Height>
+        <Width>3.71644cm</Width>
+        <ZIndex>16</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox4">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value EvaluationMode="Constant">Ukupni iznos (kn):</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox4</rd:DefaultName>
+        <Top>6.41176cm</Top>
+        <Left>13.58759cm</Left>
+        <Height>0.5588cm</Height>
+        <Width>3.45378cm</Width>
+        <ZIndex>17</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>6.93208cm</Height>
+    <Height>7.24958cm</Height>
     <Style />
   </Body>
   <Width>20.79308cm</Width>
@@ -840,7 +904,7 @@
         </Field>
         <Field Name="Iznos">
           <DataField>Iznos</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="DatumOd">
           <DataField>DatumOd</DataField>

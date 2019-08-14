@@ -15,9 +15,6 @@ namespace PCPOS.Global
         /// <summary>
         /// Method used to create In cindition for queries
         /// </summary>
-        /// <param name="list">Id list</param>
-        /// <param name="isString"></param>
-        /// <returns></returns>
         public static string CreateInCondition(List<int> list, bool isString = false)
         {
             string inStatement = "";

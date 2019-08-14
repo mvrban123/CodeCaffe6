@@ -613,6 +613,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NarudzbeNaStoluDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Report\OtpisRobe\FormOtpisRobeReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\OtpisRobe\FormOtpisRobeReport.Designer.cs">
+      <DependentUpon>FormOtpisRobeReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\Usklada_skladista\UskladaSkladistaReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1871,6 +1877,10 @@
       <DependentUpon>FrmNarudzbeNaStolu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\NaruzdbeNaStolu\ReportNarudzbeNaStolu.rdlc" />
+    <EmbeddedResource Include="Report\OtpisRobe\FormOtpisRobeReport.resx">
+      <DependentUpon>FormOtpisRobeReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\OtpisRobe\ReportSviOtpisiRobe.rdlc" />
     <EmbeddedResource Include="Report\Usklada_skladista\UskladaSkladistaReportForm.resx">
       <DependentUpon>UskladaSkladistaReportForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -2679,6 +2689,7 @@
       <CachedSettingsPropName>PC_POS_wsSoftKontrol_wsSoftKontrol</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

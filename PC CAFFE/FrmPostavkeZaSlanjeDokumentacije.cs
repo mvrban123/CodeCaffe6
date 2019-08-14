@@ -78,6 +78,8 @@ namespace PCPOS
         /// </summary>
         private void ProvjeriIzlazneListe()
         {
+            System.Threading.Thread.Sleep(500);
+
             //Kalkulacije
             if (checkBoxKalkulacije.Checked)
             {
@@ -102,10 +104,11 @@ namespace PCPOS
                 IzlazniRacuni frmIzlazniRacuni = new IzlazniRacuni(true, "izd", dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
                 frmIzlazniRacuni.ShowDialog();
             }
-            //Otpis robe ?
+            //Otpis robe
             if (checkBoxOtpisRobe.Checked)
             {
-                //Dejan: "Jos nije napravljeno"
+                IzlazniRacuni frmIzlazniRacuni = new IzlazniRacuni(true, "otp_rob", dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
+                frmIzlazniRacuni.ShowDialog();
             }
             //Usklada robe ?
             if (checkBoxUskladaRobe.Checked)

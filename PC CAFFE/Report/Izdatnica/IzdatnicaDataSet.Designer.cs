@@ -409,7 +409,7 @@ namespace PCPOS.Report.Izdatnica {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTableIzdatnicaRow AddDataTableIzdatnicaRow(int ID_Izdatnica, string Datum, string Partner, string Iznos, string DatumOd, string DatumDo) {
+            public DataTableIzdatnicaRow AddDataTableIzdatnicaRow(int ID_Izdatnica, string Datum, string Partner, decimal Iznos, string DatumOd, string DatumDo) {
                 DataTableIzdatnicaRow rowDataTableIzdatnicaRow = ((DataTableIzdatnicaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ID_Izdatnica,
@@ -457,7 +457,7 @@ namespace PCPOS.Report.Izdatnica {
                 base.Columns.Add(this.columnDatum);
                 this.columnPartner = new global::System.Data.DataColumn("Partner", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPartner);
-                this.columnIznos = new global::System.Data.DataColumn("Iznos", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnIznos = new global::System.Data.DataColumn("Iznos", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIznos);
                 this.columnDatumOd = new global::System.Data.DataColumn("DatumOd", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDatumOd);
@@ -653,10 +653,10 @@ namespace PCPOS.Report.Izdatnica {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string Iznos {
+            public decimal Iznos {
                 get {
                     try {
-                        return ((string)(this[this.tableDataTableIzdatnica.IznosColumn]));
+                        return ((decimal)(this[this.tableDataTableIzdatnica.IznosColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Iznos\' in table \'DataTableIzdatnica\' is DBNull.", e);
