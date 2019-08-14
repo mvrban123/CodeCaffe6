@@ -1855,6 +1855,14 @@ alter table partners add column hormonalni_nadomjestak character varying (500);"
                 classSQL.select_settings(sql, "podaci_tvrtka");
             }
 
+            //email za slanje dokumentacije u knjigovodstvo, katija knjigovođa 
+            rows = DTcompact.Select("table_name = 'podaci_tvrtka' and column_name = 'email_knjigovodstvo'");
+            if (rows.Count() == 0)
+            {
+                sql = "ALTER TABLE podaci_tvrtka ADD COLUMN email_knjigovodstvo nvarchar(35) default '-';";
+                classSQL.select_settings(sql, "podaci_tvrtka");
+            }
+
             if (DTpostavke.Columns["samo_prodaja"] == null)
             {
                 sql = "ALTER TABLE postavke ADD COLUMN samo_prodaja int;";

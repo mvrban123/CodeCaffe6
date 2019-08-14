@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,11 @@ namespace PCPOS.Report.Kalkposkl
         public DateTime datumOD { get; set; }
         public DateTime datumDO { get; set; }
 
-        public KalkulacijeForm()
+        private bool spremiPdf;
+        public KalkulacijeForm(bool spremiPdf)
         {
             InitializeComponent();
+            this.spremiPdf = spremiPdf;
         }
 
         private void KalkulacijeForm_Load(object sender, EventArgs e)
@@ -41,6 +44,13 @@ namespace PCPOS.Report.Kalkposkl
             this.reportViewer.LocalReport.ReportEmbeddedResource = "PCPOS.Report.Kalkposkl.Kalkulacije.rdlc";
             this.reportViewer.LocalReport.EnableExternalImages = true;
             this.reportViewer.RefreshReport();
+
+
+            if (spremiPdf)
+            {
+                Global.GlobalFunctions.SpremiPdf("Kalkulacije", reportViewer);
+                this.Close();
+            }
         }
 
         private void LoadData()

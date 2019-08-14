@@ -5,14 +5,17 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows.Forms; 
 
 namespace PCPOS.Report.NaruzdbeNaStolu
 {
     public partial class FrmNarudzbeNaStolu : Form
     {
+        public object SmtpMail { get; private set; }
+
         public FrmNarudzbeNaStolu()
         {
             InitializeComponent();
@@ -37,8 +40,8 @@ namespace PCPOS.Report.NaruzdbeNaStolu
             LoadDataCompany();
 
             this.reportViewer1.LocalReport.ReportEmbeddedResource = @"PCPOS.Report.NaruzdbeNaStolu.ReportNarudzbeNaStolu.rdlc";
-            // this.reportViewer1.LocalReport.ReportPath = "ReportNarudzbeNaStolu.rdlc";
             this.reportViewer1.RefreshReport();
+
         }
 
         private void LoadDataNarudzbe()

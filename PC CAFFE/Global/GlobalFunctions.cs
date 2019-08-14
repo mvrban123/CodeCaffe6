@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Reporting.WinForms;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -14,9 +15,6 @@ namespace PCPOS.Global
         /// <summary>
         /// Method used to create In cindition for queries
         /// </summary>
-        /// <param name="list">Id list</param>
-        /// <param name="isString"></param>
-        /// <returns></returns>
         public static string CreateInCondition(List<int> list, bool isString = false)
         {
             string inStatement = "";
@@ -79,6 +77,26 @@ namespace PCPOS.Global
         {
             Application.Restart();
             Environment.Exit(0);
+        }
+
+        public static void SpremiPdf(string ime,ReportViewer reportViewer)
+        {
+            Warning[] warnings;
+            string[] streamids;
+            string mimeType, encoding, extension;
+            byte[] bytes = reportViewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamids, out warnings);
+
+            string pdfPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $@"Dokumenti\"+ ime+"."+ extension);
+            System.IO.FileStream pdfFile = new System.IO.FileStream(pdfPath, System.IO.FileMode.Create);
+            pdfFile.Write(bytes, 0, bytes.Length);
+            pdfFile.Close();
+        }
+
+        //Ova funkcija spaja datum i vrijeme u pravilnom formatu
+        public static DateTime GenerirajDatumSVremenom(DateTime datum, int hour, int minute, int sec)
+        {
+            string[] dateValues = datum.ToString().Split('.');
+            return new DateTime(Int32.Parse(dateValues[2]), Int32.Parse(dateValues[1]), Int32.Parse(dateValues[0]), hour, minute, sec);
         }
     }
 }

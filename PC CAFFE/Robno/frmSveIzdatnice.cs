@@ -8,12 +8,22 @@ namespace PCPOS.Robno
     public partial class frmSveIzdatnice : Form
     {
         public frmIzdatnica MainForm { get; set; }
+        private bool slanjeDokumentacije;
+        private DateTime pocetniDatum;
+        private DateTime zavrsniDatum;
 
-        public frmSveIzdatnice()
+        public frmSveIzdatnice(bool slanjeDokumentacije=false,DateTime? pocetniDatum=null,DateTime? zavrsniDatum=null)
         {
             InitializeComponent();
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
             this.BackColor = Class.Postavke.backGround;
+
+            if (slanjeDokumentacije)
+            {
+                this.slanjeDokumentacije = slanjeDokumentacije;
+                this.pocetniDatum = Global.GlobalFunctions.GenerirajDatumSVremenom(Convert.ToDateTime(pocetniDatum), 0, 0, 1);
+                this.zavrsniDatum = Global.GlobalFunctions.GenerirajDatumSVremenom(Convert.ToDateTime(zavrsniDatum), 23, 59, 59);
+            }
         }
 
         private DataSet DSizdatnice = new DataSet();
@@ -523,6 +533,12 @@ ORDER BY izdatnica.datum DESC{1}",
                 cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
                 return cp;
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            PCPOS.Report.Izdatnica.FormIzdatnicaReport IzdatnicaReport = new PCPOS.Report.Izdatnica.FormIzdatnicaReport();
+            IzdatnicaReport.ShowDialog();
         }
     }
 }

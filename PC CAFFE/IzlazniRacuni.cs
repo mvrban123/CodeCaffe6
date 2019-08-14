@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Reporting.WinForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,15 +14,46 @@ namespace PCPOS
     public partial class IzlazniRacuni : Form
     {
         private bool isFaktura = true;
+        private bool slanjeDokumentacije;
+        private string cmbIme;
+        private DateTime? pocetniDatum;
+        private DateTime? zavrsniDatum;
 
-        public IzlazniRacuni()
+        public IzlazniRacuni(bool slanjeDokumentacije = false,string cmbIme=null,DateTime? pocetniDatum = null, DateTime? zavrsniDatum = null)
         {
             InitializeComponent();
+
+            if (slanjeDokumentacije)
+            {
+                this.slanjeDokumentacije = slanjeDokumentacije;
+                this.cmbIme = cmbIme;
+                this.pocetniDatum = pocetniDatum;
+                this.zavrsniDatum = zavrsniDatum;
+            }
         }
 
         private void IzlazniRacuni_Load(object sender, EventArgs e)
         {
             OnFormLoad();
+
+            if (slanjeDokumentacije)
+            {
+                DateTime PocetniDatum = GenerirajDatumSVremenom(Convert.ToDateTime(pocetniDatum), 0, 0, 1);
+                DateTime ZavrsniDatum = GenerirajDatumSVremenom(Convert.ToDateTime(zavrsniDatum), 23, 59, 59);
+
+                cbDatum.Checked = true;
+                cmbDokument.SelectedValue = cmbIme;
+                dtpOdDatuma.Value = PocetniDatum;
+                dtpDoDatuma.Value = ZavrsniDatum;
+                btnIspis.PerformClick();
+            }
+        }
+
+        //Ova funkcija spaja datum i vrijeme u pravilnom formatu
+        private DateTime GenerirajDatumSVremenom(DateTime datum,int hour,int minute, int sec)
+        {
+            string [] dateValues = datum.ToString().Split('.');
+            return new DateTime(Int32.Parse(dateValues[2]), Int32.Parse(dateValues[1]), Int32.Parse(dateValues[0]), hour, minute, sec);
         }
 
         /// <summary>
@@ -106,7 +138,7 @@ namespace PCPOS
             {
                 if ((cmbDokument.SelectedValue.ToString() != "fakt" || Util.Korisno.oibTvrtke != Class.Postavke.OIB_PC1))
                 {
-                    if(isFaktura)
+                    if (isFaktura)
                     {
                         DataTable DTSK1 = new DataTable("IzlazniRacuniSkladiste");
 
@@ -138,27 +170,31 @@ namespace PCPOS
 
         private void btnIspis_Click(object sender, EventArgs e)
         {
-            if(cbDatum.Checked)
+            if (cbDatum.Checked)
             {
-                if(cmbDokument.SelectedValue.ToString() == "fakt")
-                {
-                    Report.Kalkposkl.FaktureForm faktureForm = new Report.Kalkposkl.FaktureForm();
+                if (cmbDokument.SelectedValue.ToString() == "fakt")
+                { 
+                    Report.Kalkposkl.FaktureForm faktureForm = new Report.Kalkposkl.FaktureForm(slanjeDokumentacije);
                     faktureForm.datumOD = dtpOdDatuma.Value.Date;
                     faktureForm.datumDO = dtpDoDatuma.Value.Date;
                     faktureForm.ShowDialog();
+                    if(slanjeDokumentacije)
+                        this.Close();
                 }
 
                 if (cmbDokument.SelectedValue.ToString() == "kalk")
                 {
-                    Report.Kalkposkl.KalkulacijeForm kalkulacijeForm = new Report.Kalkposkl.KalkulacijeForm();
+                    Report.Kalkposkl.KalkulacijeForm kalkulacijeForm = new Report.Kalkposkl.KalkulacijeForm(slanjeDokumentacije);
                     kalkulacijeForm.datumOD = dtpOdDatuma.Value.Date;
                     kalkulacijeForm.datumDO = dtpDoDatuma.Value.Date;
                     kalkulacijeForm.ShowDialog();
+                    if (slanjeDokumentacije)
+                        this.Close();
                 }
 
                 if (cmbDokument.SelectedValue.ToString() == "prim")
                 {
-                    Report.Kalkposkl.PrimkeForm primkeForm = new Report.Kalkposkl.PrimkeForm();
+                    Report.Kalkposkl.PrimkeForm primkeForm = new Report.Kalkposkl.PrimkeForm(slanjeDokumentacije);
                     primkeForm.BrojFakDO = tbDoRacuna.Text;
                     primkeForm.documenat = cmbDokument.SelectedValue.ToString();
                     primkeForm.prema_rac = cbBrojevi.Checked;
@@ -169,6 +205,30 @@ namespace PCPOS
                     primkeForm.datumOD = dtpOdDatuma.Value.Date;
                     primkeForm.datumDO = dtpDoDatuma.Value.Date;
                     primkeForm.ShowDialog();
+                    if (slanjeDokumentacije)
+                        this.Close();
+                }
+
+                //Napravljeno samo za datume
+                if (cmbDokument.SelectedValue.ToString() == "izd")
+                {
+                    Report.Izdatnica.FormIzdatnicaReport formIzdatnicaReport = new Report.Izdatnica.FormIzdatnicaReport(slanjeDokumentacije);
+                    formIzdatnicaReport.datumOD = dtpOdDatuma.Value.Date;
+                    formIzdatnicaReport.datumDO = dtpDoDatuma.Value.Date;
+                    formIzdatnicaReport.ShowDialog();
+                    if (slanjeDokumentacije)
+                        this.Close();
+                }
+
+                //Napravljeno samo za datume
+                if (cmbDokument.SelectedValue.ToString() == "otp_rob")
+                {
+                    Report.OtpisRobe.FormOtpisRobeReport formOtpisRobeReport = new Report.OtpisRobe.FormOtpisRobeReport(slanjeDokumentacije);
+                    formOtpisRobeReport.datumOD = dtpOdDatuma.Value.Date;
+                    formOtpisRobeReport.datumDO = dtpDoDatuma.Value.Date;
+                    formOtpisRobeReport.ShowDialog();
+                    if (slanjeDokumentacije)
+                        this.Close();
                 }
             }
         }

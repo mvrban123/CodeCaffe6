@@ -38,7 +38,7 @@ namespace PCPOS
             fillCB();
             fillDataGrid();
             PaintRows(dgv);
-            this.Paint += new PaintEventHandler(Class.Postavke.changeBackground);
+           // this.Paint += new PaintEventHandler(Class.Postavke.changeBackground);
 
             DataTable DTzap = classSQL.select("SELECT id_zaposlenik, id_dopustenje FROM zaposlenici WHERE id_zaposlenik='" + Properties.Settings.Default.id_zaposlenik + "'", "zaposlenici").Tables[0];
 

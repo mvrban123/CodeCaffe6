@@ -157,6 +157,7 @@ namespace PCPOS
             this.timerSinkronizacijaPoPeriodu = new System.Windows.Forms.Timer(this.components);
             this.timerRestartNovaGodina = new System.Windows.Forms.Timer(this.components);
             this.timerNaknadnaFiskalizacija = new System.Windows.Forms.Timer(this.components);
+            this.postavkeZaSlanjeDokumentacijeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -861,7 +862,8 @@ namespace PCPOS
             this.postavkeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.podaciOTvrtkiToolStripMenuItem,
             this.postavkeProgramaToolStripMenuItem,
-            this.posPrinterToolStripMenuItem});
+            this.posPrinterToolStripMenuItem,
+            this.postavkeZaSlanjeDokumentacijeToolStripMenuItem});
             this.postavkeToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.postavkeToolStripMenuItem.Name = "postavkeToolStripMenuItem";
             this.postavkeToolStripMenuItem.Size = new System.Drawing.Size(78, 26);
@@ -870,21 +872,21 @@ namespace PCPOS
             // podaciOTvrtkiToolStripMenuItem
             // 
             this.podaciOTvrtkiToolStripMenuItem.Name = "podaciOTvrtkiToolStripMenuItem";
-            this.podaciOTvrtkiToolStripMenuItem.Size = new System.Drawing.Size(222, 24);
+            this.podaciOTvrtkiToolStripMenuItem.Size = new System.Drawing.Size(298, 24);
             this.podaciOTvrtkiToolStripMenuItem.Text = "Podaci o tvrtki";
             this.podaciOTvrtkiToolStripMenuItem.Click += new System.EventHandler(this.podaciOTvrtkiToolStripMenuItem_Click);
             // 
             // postavkeProgramaToolStripMenuItem
             // 
             this.postavkeProgramaToolStripMenuItem.Name = "postavkeProgramaToolStripMenuItem";
-            this.postavkeProgramaToolStripMenuItem.Size = new System.Drawing.Size(222, 24);
+            this.postavkeProgramaToolStripMenuItem.Size = new System.Drawing.Size(298, 24);
             this.postavkeProgramaToolStripMenuItem.Text = "Postavke programa";
             this.postavkeProgramaToolStripMenuItem.Click += new System.EventHandler(this.postavkeProgramaToolStripMenuItem_Click);
             // 
             // posPrinterToolStripMenuItem
             // 
             this.posPrinterToolStripMenuItem.Name = "posPrinterToolStripMenuItem";
-            this.posPrinterToolStripMenuItem.Size = new System.Drawing.Size(222, 24);
+            this.posPrinterToolStripMenuItem.Size = new System.Drawing.Size(298, 24);
             this.posPrinterToolStripMenuItem.Text = "Postavke POS opreme";
             this.posPrinterToolStripMenuItem.Click += new System.EventHandler(this.posPrinterToolStripMenuItem_Click);
             // 
@@ -1105,11 +1107,6 @@ namespace PCPOS
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
-            // bgSinkronizacija
-            // 
-            //this.bgSinkronizacija.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgSinkronizacija_DoWork);
-            //this.bgSinkronizacija.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgSinkronizacija_RunWorkerCompleted);
-            // 
             // timerBackupSvakih2Sata
             // 
             this.timerBackupSvakih2Sata.Interval = 1800000;
@@ -1129,6 +1126,13 @@ namespace PCPOS
             // 
             this.timerNaknadnaFiskalizacija.Interval = 1800000;
             this.timerNaknadnaFiskalizacija.Tick += new System.EventHandler(this.timerNaknadnaFiskalizacija_Tick);
+            // 
+            // postavkeZaSlanjeDokumentacijeToolStripMenuItem
+            // 
+            this.postavkeZaSlanjeDokumentacijeToolStripMenuItem.Name = "postavkeZaSlanjeDokumentacijeToolStripMenuItem";
+            this.postavkeZaSlanjeDokumentacijeToolStripMenuItem.Size = new System.Drawing.Size(298, 24);
+            this.postavkeZaSlanjeDokumentacijeToolStripMenuItem.Text = "Postavke za slanje dokumentacije";
+            this.postavkeZaSlanjeDokumentacijeToolStripMenuItem.Click += new System.EventHandler(this.postavkeZaSlanjeDokumentacijeToolStripMenuItem_Click);
             // 
             // frmMenu
             // 
@@ -1281,6 +1285,7 @@ namespace PCPOS
         private ToolStripMenuItem uskladaRobeNaSkladištuToolStripMenuItem;
         private ToolStripMenuItem karticaRobeToolStripMenuItem1;
         private ToolStripMenuItem porezNaPotrosnjuPoGrupamaToolStripMenuItem;
+        private ToolStripMenuItem postavkeZaSlanjeDokumentacijeToolStripMenuItem;
     }
 }
 

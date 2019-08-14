@@ -75,6 +75,9 @@
             this.txtPdvBr = new System.Windows.Forms.TextBox();
             this.tbPPMIPO = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.tbEmailZaSlanjeDokUKnjigovodstvo = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label14
@@ -547,12 +550,43 @@
             this.label23.TabIndex = 46;
             this.label23.Text = "Šifra PP-MI-PO:";
             // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label24.Location = new System.Drawing.Point(31, 541);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(102, 17);
+            this.label24.TabIndex = 47;
+            this.label24.Text = "Email za slanje";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label25.Location = new System.Drawing.Point(12, 563);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(141, 17);
+            this.label25.TabIndex = 48;
+            this.label25.Text = "dok. u knjigovodstvo:";
+            // 
+            // tbEmailZaSlanjeDokUKnjigovodstvo
+            // 
+            this.tbEmailZaSlanjeDokUKnjigovodstvo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.tbEmailZaSlanjeDokUKnjigovodstvo.Location = new System.Drawing.Point(165, 557);
+            this.tbEmailZaSlanjeDokUKnjigovodstvo.Name = "tbEmailZaSlanjeDokUKnjigovodstvo";
+            this.tbEmailZaSlanjeDokUKnjigovodstvo.Size = new System.Drawing.Size(302, 23);
+            this.tbEmailZaSlanjeDokUKnjigovodstvo.TabIndex = 49;
+            // 
             // podloga
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(966, 589);
+            this.Controls.Add(this.tbEmailZaSlanjeDokUKnjigovodstvo);
+            this.Controls.Add(this.label25);
+            this.Controls.Add(this.label24);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.tbPPMIPO);
             this.Controls.Add(this.label22);
@@ -660,5 +694,8 @@
         private System.Windows.Forms.TextBox txtPdvBr;
         private System.Windows.Forms.TextBox tbPPMIPO;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox tbEmailZaSlanjeDokUKnjigovodstvo;
     }
 }

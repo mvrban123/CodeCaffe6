@@ -69,6 +69,8 @@
             // 
             // dtpOd
             // 
+            this.dtpOd.CustomFormat = "dd/MM/yyyy";
+            this.dtpOd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpOd.Location = new System.Drawing.Point(12, 75);
             this.dtpOd.Name = "dtpOd";
             this.dtpOd.Size = new System.Drawing.Size(266, 20);
@@ -86,6 +88,8 @@
             // 
             // dtpDo
             // 
+            this.dtpDo.CustomFormat = "dd/MM/yyyy";
+            this.dtpDo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDo.Location = new System.Drawing.Point(12, 126);
             this.dtpDo.Name = "dtpDo";
             this.dtpDo.Size = new System.Drawing.Size(266, 20);

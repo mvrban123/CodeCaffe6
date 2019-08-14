@@ -8,9 +8,14 @@ namespace PCPOS.Report.Liste
 {
     public partial class frmListe : Form
     {
-        public frmListe()
+        private bool pdfSpremi;
+        private string nacin;
+
+        public frmListe(bool pdfSpremi=false, string nacin=null)
         {
             InitializeComponent();
+            this.pdfSpremi = pdfSpremi;
+            this.nacin = nacin;
         }
 
         public string artikl { get; set; }
@@ -33,6 +38,7 @@ namespace PCPOS.Report.Liste
             int heigt = SystemInformation.VirtualScreen.Height;
             this.Height = heigt - 60;
             this.Location = new Point((SystemInformation.VirtualScreen.Width / 2) - 411, 5);
+
 
             //dokumenat = "PrometPoRobi";
             //broj_dokumenta = "2";
@@ -77,6 +83,13 @@ namespace PCPOS.Report.Liste
             }
 
             this.reportViewer1.RefreshReport();
+
+
+            if (pdfSpremi)
+            {
+                Global.GlobalFunctions.SpremiPdf("ProdajnaRoba"+nacin, reportViewer1);
+                this.Close();
+            }
         }
 
         private void promjenaCijene()

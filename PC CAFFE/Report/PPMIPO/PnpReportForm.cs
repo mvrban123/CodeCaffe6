@@ -16,11 +16,13 @@ namespace PCPOS.Report.PPMIPO
         public DateTime datumOd { get; set; }
         public DateTime datumDo { get; set; }
         public string idDucan { get; set; }
+        private bool spremiPdf;
 
-        public PnpReportForm()
+        public PnpReportForm(bool spremiPdf=false)
         {
             InitializeComponent();
             this.Controls.Add(this.reportViewer);
+            this.spremiPdf = spremiPdf;
         }
 
         private void PnpReportForm_Load(object sender, EventArgs e)
@@ -42,6 +44,12 @@ namespace PCPOS.Report.PPMIPO
             this.reportViewer.LocalReport.ReportEmbeddedResource = "PCPOS.Report.PPMIPO.PorezNaPotrosnju.rdlc";
             this.reportViewer.LocalReport.EnableExternalImages = true;
             this.reportViewer.RefreshReport();
+
+            if (spremiPdf)
+            {
+                Global.GlobalFunctions.SpremiPdf("PPMIPO", reportViewer);
+                this.Close();
+            }
         }
 
         private void LoadData()

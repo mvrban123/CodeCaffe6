@@ -126,7 +126,7 @@
             // 
             // dtpDO
             // 
-            this.dtpDO.CustomFormat = "dd.MM.yyyy   HH:mm:ss";
+            this.dtpDO.CustomFormat = "dd.MM.yyyy ";
             this.dtpDO.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.dtpDO.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDO.Location = new System.Drawing.Point(15, 85);
@@ -149,7 +149,7 @@
             // 
             // dtpOD
             // 
-            this.dtpOD.CustomFormat = "dd.MM.yyyy   HH:mm:ss";
+            this.dtpOD.CustomFormat = "dd.MM.yyyy ";
             this.dtpOD.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.dtpOD.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpOD.Location = new System.Drawing.Point(13, 36);

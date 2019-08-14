@@ -6,14 +6,56 @@ namespace PCPOS.Caffe
 {
     public partial class frmProdajnaRoba : Form
     {
-        public frmProdajnaRoba()
+        private bool SlanjeDokumenta;
+        private string Nacin;
+        private DateTime PocetniDatum;
+        private DateTime ZavrsniDatum;
+
+        public frmProdajnaRoba(bool slanjeDokumenta = false, string nacin = null, DateTime? pocetniDatum = null, DateTime? zavrsniDatum = null)
         {
             InitializeComponent();
+
+            if (slanjeDokumenta)
+            {
+                SlanjeDokumenta = slanjeDokumenta;
+                Nacin = nacin;
+                PocetniDatum = Global.GlobalFunctions.GenerirajDatumSVremenom(Convert.ToDateTime(pocetniDatum), 0, 0, 1);
+                ZavrsniDatum = Global.GlobalFunctions.GenerirajDatumSVremenom(Convert.ToDateTime(zavrsniDatum), 23, 59, 59);
+            }
         }
 
         private void frmProdajnaRoba_Load(object sender, EventArgs e)
         {
             SetCB();
+
+            if (SlanjeDokumenta)
+            {
+                if (Nacin == "Pice" || Nacin == "Hrana" || Nacin=="TrgRoba")
+                    chbPodgrupa.Checked = true;
+
+                Report.Liste.frmListe formListe = new Report.Liste.frmListe(true, Nacin); // true, pice/hrana/trgovackaroba/ukupno
+                formListe.datumOD = PocetniDatum;
+                formListe.datumDO = ZavrsniDatum;
+                formListe.ImeForme = "Promet po robi";
+                formListe.dokumenat = "PrometRobe";
+                if (chbPodgrupa.Checked)
+                {
+                    switch (Nacin) // Hard codeano zato sto Dejan veli da je 1 uvijek pice, 2 je hrana, a 3 je trgovacka roba
+                    {
+                        case "Pice":
+                            formListe.id_podgrupa = "1";
+                            break;
+                        case "Hrana":
+                            formListe.id_podgrupa="2";
+                            break;
+                        default:
+                            formListe.id_podgrupa="3";
+                            break;
+                    }
+                }
+                formListe.ShowDialog();
+                this.Close();
+            }
         }
 
         private DataTable DT_Zaposlenik;

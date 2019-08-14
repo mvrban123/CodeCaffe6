@@ -113,6 +113,8 @@
             // dtpDatumDo
             // 
             this.dtpDatumDo.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.dtpDatumDo.CustomFormat = "dd/MM/yyyy";
+            this.dtpDatumDo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDatumDo.Location = new System.Drawing.Point(93, 36);
             this.dtpDatumDo.Name = "dtpDatumDo";
             this.dtpDatumDo.Size = new System.Drawing.Size(140, 20);
@@ -131,6 +133,8 @@
             // dtpDatumOd
             // 
             this.dtpDatumOd.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.dtpDatumOd.CustomFormat = "dd/MM/yyyy";
+            this.dtpDatumOd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDatumOd.Location = new System.Drawing.Point(93, 10);
             this.dtpDatumOd.Name = "dtpDatumOd";
             this.dtpDatumOd.Size = new System.Drawing.Size(140, 20);
@@ -172,6 +176,7 @@
             this.Name = "PPMIPOForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PP-MI-PO";
+            this.Load += new System.EventHandler(this.PPMIPOForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dsRpodaciTvrtke)).EndInit();

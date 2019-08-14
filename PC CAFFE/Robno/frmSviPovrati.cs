@@ -271,5 +271,11 @@ namespace PCPOS.Robno
                 return cp;
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Report.OtpisRobe.FormOtpisRobeReport report = new Report.OtpisRobe.FormOtpisRobeReport();
+            report.ShowDialog();
+        }
     }
 }

@@ -12,14 +12,34 @@ namespace PCPOS.IzlazniDokumenti
 {
     public partial class ObracunGrupeProizvodaForm : Form
     {
-        public ObracunGrupeProizvodaForm()
+        bool SlanjeDokumenta;
+        DateTime PocetniDatum;
+        DateTime ZavrsniDatum;
+
+        public ObracunGrupeProizvodaForm(bool slanjeDokumenata=false, DateTime? pocetniDatum=null, DateTime? zavrsniDatum=null)
         {
             InitializeComponent();
+
+            if (slanjeDokumenata)
+            {
+                SlanjeDokumenta = slanjeDokumenata;
+                PocetniDatum = Global.GlobalFunctions.GenerirajDatumSVremenom(Convert.ToDateTime(pocetniDatum), 0, 0, 1);
+                ZavrsniDatum = Global.GlobalFunctions.GenerirajDatumSVremenom(Convert.ToDateTime(zavrsniDatum), 23, 59, 59);
+            }
         }
 
         private void ObracunGrupeProizvodaForm_Load(object sender, EventArgs e)
         {
             LoadGrupe();
+
+            if (SlanjeDokumenta)
+            {
+                Report.GrupeProizvoda.ReportObracunGrupe form = new Report.GrupeProizvoda.ReportObracunGrupe(true);
+                form.datumOd = PocetniDatum;
+                form.datumDo = ZavrsniDatum;
+                form.ShowDialog();
+                this.Close();
+            }
         }
 
         /// <summary>

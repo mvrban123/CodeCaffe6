@@ -9,9 +9,12 @@ namespace PCPOS.Report.PrometiPoDanima
 {
     public partial class frmListePoDanima : Form
     {
-        public frmListePoDanima()
+        public bool spremiPdf;
+
+        public frmListePoDanima(bool spremiPdf=false)
         {
             InitializeComponent();
+            this.spremiPdf = spremiPdf;
         }
 
         public string artikl { get; set; }
@@ -46,6 +49,12 @@ namespace PCPOS.Report.PrometiPoDanima
 
             this.reportViewer1.RefreshReport();
             this.reportViewer1.RefreshReport();
+
+            if (spremiPdf)
+            {
+                Global.GlobalFunctions.SpremiPdf("ObracunPrometaPoDanima", reportViewer1);
+                this.Close();
+            }
         }
 
         private void promjenaCijene()

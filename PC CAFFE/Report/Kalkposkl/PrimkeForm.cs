@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,10 +33,12 @@ namespace PCPOS.Report.Kalkposkl
 
         public string BrojFakOD { get; set; }
         public string BrojFakDO { get; set; }
+        public bool spremiPdf;
 
-        public PrimkeForm()
+        public PrimkeForm(bool spremiPdf=false)
         {
             InitializeComponent();
+            this.spremiPdf = spremiPdf;
         }
 
         private void PrimkeForm_Load(object sender, EventArgs e)
@@ -57,6 +60,13 @@ namespace PCPOS.Report.Kalkposkl
             this.reportViewer.LocalReport.ReportEmbeddedResource = "PCPOS.Report.Kalkposkl.Primke.rdlc";
             this.reportViewer.LocalReport.EnableExternalImages = true;
             this.reportViewer.RefreshReport();
+
+
+            if (spremiPdf)
+            {
+                Global.GlobalFunctions.SpremiPdf("Primke", reportViewer);
+                this.Close();
+            }
         }
 
         private void LoadData()
