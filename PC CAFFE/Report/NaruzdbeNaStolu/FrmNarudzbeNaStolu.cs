@@ -40,34 +40,7 @@ namespace PCPOS.Report.NaruzdbeNaStolu
             LoadDataCompany();
 
             this.reportViewer1.LocalReport.ReportEmbeddedResource = @"PCPOS.Report.NaruzdbeNaStolu.ReportNarudzbeNaStolu.rdlc";
-            // this.reportViewer1.LocalReport.ReportPath = "ReportNarudzbeNaStolu.rdlc";
             this.reportViewer1.RefreshReport();
-
-           /* Warning[] warnings;
-            string[] streamids;
-            string mimeType, encoding, extension, deviceInfo;
-            byte[] bytes=reportViewer1.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamids, out warnings);
-            deviceInfo = "True";
-
-            string pdfPath = $@"C:\Users\Korisnik\Desktop\Retard."+extension;
-            System.IO.FileStream pdfFile = new System.IO.FileStream(pdfPath, System.IO.FileMode.Create);
-            pdfFile.Write(bytes, 0, bytes.Length);
-            pdfFile.Close();*/
-
-            /*MailMessage message = new MailMessage();
-            message.To.Add("dejan@code-it.hr");
-            message.From = new MailAddress("malcom.houston98@gmail.com");
-            message.Subject = "test";
-            message.Body = "pdf attached";
-
-            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-            SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("malcom.houston98", "L73RjBGc");
-            SmtpServer.EnableSsl = true;
-
-            SmtpServer.Send(message);
-            MessageBox.Show("jfesaoajfaiso");
-           */
 
         }
 

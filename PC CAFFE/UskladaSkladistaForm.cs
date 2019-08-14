@@ -289,6 +289,7 @@ namespace PCPOS
                 if (txtSifra_robe.Text == "")
                 {
                     frmRobaTrazi roba = new frmRobaTrazi();
+                    roba.id_skladiste = int.Parse(cbSkladiste.SelectedValue.ToString());
                     roba.ShowDialog();
 
                     if (Properties.Settings.Default.id_roba != "")

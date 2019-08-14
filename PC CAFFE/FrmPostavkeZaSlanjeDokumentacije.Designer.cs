@@ -193,7 +193,6 @@
             this.checkBoxPice.TabIndex = 20;
             this.checkBoxPice.Text = "Piće";
             this.checkBoxPice.UseVisualStyleBackColor = true;
-            this.checkBoxPice.CheckedChanged += new System.EventHandler(this.checkBoxPice_CheckedChanged);
             // 
             // checkBoxHrana
             // 
@@ -204,7 +203,6 @@
             this.checkBoxHrana.TabIndex = 21;
             this.checkBoxHrana.Text = "Hrana";
             this.checkBoxHrana.UseVisualStyleBackColor = true;
-            this.checkBoxHrana.CheckedChanged += new System.EventHandler(this.checkBoxHrana_CheckedChanged);
             // 
             // checkBoxTrgovackaRoba
             // 
@@ -215,7 +213,6 @@
             this.checkBoxTrgovackaRoba.TabIndex = 22;
             this.checkBoxTrgovackaRoba.Text = "Trgovačka roba";
             this.checkBoxTrgovackaRoba.UseVisualStyleBackColor = true;
-            this.checkBoxTrgovackaRoba.CheckedChanged += new System.EventHandler(this.checkBoxTrgovackaRoba_CheckedChanged);
             // 
             // checkBoxUkupno
             // 
@@ -226,7 +223,6 @@
             this.checkBoxUkupno.TabIndex = 23;
             this.checkBoxUkupno.Text = "Ukupno";
             this.checkBoxUkupno.UseVisualStyleBackColor = true;
-            this.checkBoxUkupno.CheckedChanged += new System.EventHandler(this.checkBoxUkupno_CheckedChanged);
             // 
             // checkBoxPrometKase
             // 

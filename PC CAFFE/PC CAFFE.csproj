@@ -591,6 +591,17 @@
     <Compile Include="frmPotrosniMaterijal.designer.cs">
       <DependentUpon>frmPotrosniMaterijal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\Izdatnica\FormIzdatnicaReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\Izdatnica\FormIzdatnicaReport.Designer.cs">
+      <DependentUpon>FormIzdatnicaReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\Izdatnica\IzdatnicaDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IzdatnicaDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Report\NaruzdbeNaStolu\FrmNarudzbeNaStolu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -601,6 +612,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NarudzbeNaStoluDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\OtpisRobe\FormOtpisRobeReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\OtpisRobe\FormOtpisRobeReport.Designer.cs">
+      <DependentUpon>FormOtpisRobeReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\Usklada_skladista\UskladaSkladistaReportForm.cs">
       <SubType>Form</SubType>
@@ -1852,10 +1869,18 @@
     <EmbeddedResource Include="frmSinkronizacija.resx">
       <DependentUpon>frmSinkronizacija.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\Izdatnica\FormIzdatnicaReport.resx">
+      <DependentUpon>FormIzdatnicaReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Izdatnica\ReportIzdatnica.rdlc" />
     <EmbeddedResource Include="Report\NaruzdbeNaStolu\FrmNarudzbeNaStolu.resx">
       <DependentUpon>FrmNarudzbeNaStolu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\NaruzdbeNaStolu\ReportNarudzbeNaStolu.rdlc" />
+    <EmbeddedResource Include="Report\OtpisRobe\FormOtpisRobeReport.resx">
+      <DependentUpon>FormOtpisRobeReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\OtpisRobe\ReportSviOtpisiRobe.rdlc" />
     <EmbeddedResource Include="Report\Usklada_skladista\UskladaSkladistaReportForm.resx">
       <DependentUpon>UskladaSkladistaReportForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -2439,6 +2464,17 @@
       <DependentUpon>DSuskladenje.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Report\Izdatnica\IzdatnicaDataSet.xsc">
+      <DependentUpon>IzdatnicaDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Report\Izdatnica\IzdatnicaDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>IzdatnicaDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Report\Izdatnica\IzdatnicaDataSet.xss">
+      <DependentUpon>IzdatnicaDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Report\NaruzdbeNaStolu\NarudzbeNaStoluDataSet.xsc">
       <DependentUpon>NarudzbeNaStoluDataSet.xsd</DependentUpon>
     </None>
@@ -2653,6 +2689,7 @@
       <CachedSettingsPropName>PC_POS_wsSoftKontrol_wsSoftKontrol</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

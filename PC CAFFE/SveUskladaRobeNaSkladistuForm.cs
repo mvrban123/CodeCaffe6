@@ -69,7 +69,6 @@ namespace PCPOS
             }
             Report.Uskladaskladista.UskladaSkladistaReportForm aa = new Report.Uskladaskladista.UskladaSkladistaReportForm();
             aa.broj_dokumenta = int.Parse(sveUskladeView.CurrentRow.Cells[0].FormattedValue.ToString());
-            //aa.skladiste = int.Parse(sveUskladeView.CurrentRow.Cells["id_skladiste"].FormattedValue.ToString());
             aa.ShowDialog();
         }
     }

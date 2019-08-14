@@ -8,26 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Mail;
+using System.Net;
+using System.Net.Mime;
 
 namespace PCPOS
 {
     public partial class FrmPostavkeZaSlanjeDokumentacije : Form
     {
         /// <summary>
-        /// Global variables
-        /// </summary>
-        private string SendingEmail; // mail firme s koje se saljeju dokumenti prema knjigovodstvu
-        private string ReceiverEmail; // mail knjigovodstva
-
-        /// <summary>
         /// Constructor
         /// </summary>
         public FrmPostavkeZaSlanjeDokumentacije()
         {
             InitializeComponent();
-
-            SendingEmail = "malcom.houston98@gmail.com";
-            ReceiverEmail = PreuzmiMailKnjigovodstvaIzKompaktneBaze();
         }
 
         /// <summary>
@@ -38,23 +32,35 @@ namespace PCPOS
             MessageBox.Show("Nakon pritiska na gumb OK, svi označeni dokumenti generirat će se i bit poslani knjigovodstvu.", "Informacija", MessageBoxButtons.OK, MessageBoxIcon.Information);
             MessageBox.Show("Molimo Vas da NE DIRATE NIŠTA do trenutka kad dobijete poruku da je mail poslan. Na slabijim računalima ovo može potrajati i par minuta.", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+            ObrisiDirektorijAkoPostoji();
             StvoriDirektorijAkoNePostoji();
-            ProvjeriIzlazneListe(); // Fale izdatnice, otpis robe i usklada robe
+            ProvjeriIzlazneListe(); // Fale izdatnice, otpis robe i usklada robe - Dejan: "Jos nije napravljeno."
             ProvjeriPromet();
-            //ŠaljiMail();
-            
+            PosaljiEmail();
 
-            MessageBox.Show("Odabrani dokumenti poslani su knjigovodstvu.", "Informacija", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+
         /// <summary>
-        /// Ova metoda služi za dobivanje emaila knjigovodstva iz kompaktne baze podataka
+        /// Ova metoda sluzi kako bi se obrisao direktorij Dokumenti ukoliko on postoji.
+        /// Time pridobivamo da se stari dokumenti koji su se nalazili u tom folderu obrišu.
+        /// Nakon toga slijedi stvaranje novog direktorija s novim dokumentima.
         /// </summary>
-        /// <returns></returns>
-        private string PreuzmiMailKnjigovodstvaIzKompaktneBaze()
+        private void ObrisiDirektorijAkoPostoji()
         {
-            DataTable DTpodaci = classSQL.select_settings("SELECT * FROM podaci_tvrtka WHERE id='1'", "podaci_tvrtka").Tables[0];
-            return DTpodaci.Rows[0]["email_knjigovodstvo"].ToString();
+            string Path = AppDomain.CurrentDomain.BaseDirectory + "Dokumenti";
+            if (Directory.Exists(Path))
+            {
+                //Brise pdfove unutra
+                DirectoryInfo di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "Dokumenti"); 
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+                
+                //Brise direktorij
+                Directory.Delete(Path);
+            }
         }
 
         /// <summary>
@@ -72,6 +78,8 @@ namespace PCPOS
         /// </summary>
         private void ProvjeriIzlazneListe()
         {
+            System.Threading.Thread.Sleep(500);
+
             //Kalkulacije
             if (checkBoxKalkulacije.Checked)
             {
@@ -90,21 +98,22 @@ namespace PCPOS
                 IzlazniRacuni frmIzlazniRacuni = new IzlazniRacuni(true, "fakt", dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
                 frmIzlazniRacuni.ShowDialog();
             }
-            //Izdatnice ? - Samo se 1 moze printati odjednom? Kaj s tim?
+            //Izdatnice
             if (checkBoxIzdatnice.Checked)
             {
-                /*PCPOS.Robno.frmSveIzdatnice frmAllIzdatnice = new PCPOS.Robno.frmSveIzdatnice();
-                frmAllIzdatnice.ShowDialog();*/
+                IzlazniRacuni frmIzlazniRacuni = new IzlazniRacuni(true, "izd", dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
+                frmIzlazniRacuni.ShowDialog();
             }
-            //Otpis robe ?
+            //Otpis robe
             if (checkBoxOtpisRobe.Checked)
             {
-
+                IzlazniRacuni frmIzlazniRacuni = new IzlazniRacuni(true, "otp_rob", dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
+                frmIzlazniRacuni.ShowDialog();
             }
             //Usklada robe ?
-            if(checkBoxUskladaRobe.Checked)
+            if (checkBoxUskladaRobe.Checked)
             {
-
+                //Dejan: "Jos nije napravljeno"
             }
         }
 
@@ -119,7 +128,7 @@ namespace PCPOS
             //Obracun poreza i prometa
             if (checkBoxObracunPorezaIPrometa.Checked)
             {
-                IzlazniDokumenti.ObracunForm frmObracun = new IzlazniDokumenti.ObracunForm(true,dateTimePickerPocetni.Value,dateTimePickerZavrsni.Value);
+                IzlazniDokumenti.ObracunForm frmObracun = new IzlazniDokumenti.ObracunForm(true, dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
                 frmObracun.ShowDialog();
             }
             //Obracun grupe proizvoda
@@ -137,78 +146,102 @@ namespace PCPOS
             //Promet kase
             if (checkBoxPrometKase.Checked)
             {
-                PCPOS.Kasa.frmPrometKase formPrometKase = new PCPOS.Kasa.frmPrometKase(true, dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
+                Kasa.frmPrometKase formPrometKase = new Kasa.frmPrometKase(true, dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
                 formPrometKase.ShowDialog();
             }
             //Promet po prodajnoj robi
             if (checkBoxPice.Checked)
             {
-                PCPOS.Caffe.frmProdajnaRoba formProdajnaRoba = new PCPOS.Caffe.frmProdajnaRoba(true, "Pice", dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
+                Caffe.frmProdajnaRoba formProdajnaRoba = new Caffe.frmProdajnaRoba(true, "Pice", dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
                 formProdajnaRoba.ShowDialog();
             }
 
             if (checkBoxHrana.Checked)
             {
-                PCPOS.Caffe.frmProdajnaRoba formProdajnaRoba = new PCPOS.Caffe.frmProdajnaRoba(true, "Hrana", dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
+                Caffe.frmProdajnaRoba formProdajnaRoba = new Caffe.frmProdajnaRoba(true, "Hrana", dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
                 formProdajnaRoba.ShowDialog();
             }
 
             if (checkBoxTrgovackaRoba.Checked)
             {
-                PCPOS.Caffe.frmProdajnaRoba formProdajnaRoba = new PCPOS.Caffe.frmProdajnaRoba(true, "TrgRoba", dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
+                Caffe.frmProdajnaRoba formProdajnaRoba = new Caffe.frmProdajnaRoba(true, "TrgRoba", dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
                 formProdajnaRoba.ShowDialog();
             }
 
             if (checkBoxUkupno.Checked)
             {
-                PCPOS.Caffe.frmProdajnaRoba formProdajnaRoba = new PCPOS.Caffe.frmProdajnaRoba(true, "Ukupno",dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
+                Caffe.frmProdajnaRoba formProdajnaRoba = new Caffe.frmProdajnaRoba(true, "Ukupno", dateTimePickerPocetni.Value, dateTimePickerZavrsni.Value);
                 formProdajnaRoba.ShowDialog();
             }
         }
-
 
         /// <summary>
-        /// EventHandlers
+        /// Ova metoda koristi se za slanje e-maila.
         /// </summary>
-      
-
-        private void checkBoxPice_CheckedChanged(object sender, EventArgs e)
+        private void PosaljiEmail()
         {
-            if (checkBoxPice.Checked)
+            DataTable DTpodaci = classSQL.select_settings("SELECT * FROM podaci_tvrtka WHERE id='1'", "podaci_tvrtka").Tables[0];
+            string imetvrtke = DTpodaci.Rows[0]["ime_tvrtke"].ToString();
+            string email = DTpodaci.Rows[0]["email_knjigovodstvo"].ToString();
+            if (!EmailOdRacunovodstvaUnesen(email))
+                return;
+
+            try
             {
-                checkBoxHrana.Checked = false;
-                checkBoxTrgovackaRoba.Checked = false;
-                checkBoxUkupno.Checked = false;
+                //Smtp
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com"); // SmtpServerName = smtp.gmail.com
+                SmtpServer.Port = 587;
+                SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("dokumenti.codeit@gmail.com", "Dejan102");
+                //SmtpServer.Credentials = new System.Net.NetworkCredential("prometi@code-it.hr", "Prometi123");
+                SmtpServer.EnableSsl = true;
+
+                //E-Mail
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress("dokumenti.codeit@gmail.com");
+                //mail.From = new MailAddress("prometi@code-it.hr");
+                mail.To.Add(email);
+                mail.Subject = "Dokumenti za knjigovodstvo - " + imetvrtke;
+                mail.Body = $@"Poštovani! U prilogu se nalaze dokumenti potrebni za računovodstvo od datuma {dateTimePickerPocetni.Value.ToString("dd/MM/yyyy")} do datuma {dateTimePickerZavrsni.Value.ToString("dd/MM/yyyy")}.";
+                StaviPDFoveUEmail(mail);
+
+                //Send E-Mail
+                SmtpServer.Send(mail);
+                MessageBox.Show("Odabrani dokumenti poslani su knjigovodstvu.", "Informacija", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Greška u slanju E-Maila knjigovodstvu." + ex.ToString());
             }
         }
 
-        private void checkBoxHrana_CheckedChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Ova metoda provjerava ukoliko je email knjigovodstva koji je unesen u Postavke -> Postavke o tvrtki ispravan.
+        /// </summary>
+        private bool EmailOdRacunovodstvaUnesen(string email)
         {
-            if (checkBoxHrana.Checked)
+            try
             {
-                checkBoxPice.Checked = false;
-                checkBoxTrgovackaRoba.Checked = false;
-                checkBoxUkupno.Checked = false;
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Neispravan E-Mail računovodstva. Idite u Postavke -> Podaci o tvrtki te upišite ispravan E-Mail knjigovodstva.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
 
-        private void checkBoxTrgovackaRoba_CheckedChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Ova metoda stavlja PDFove koji se nalaze u folderu Dokumenti u Mail prije slanja istog u računovodstvo.
+        /// </summary>
+        private void StaviPDFoveUEmail(MailMessage mail)
         {
-            if (checkBoxTrgovackaRoba.Checked)
+            DirectoryInfo d = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "Dokumenti");
+            FileInfo[] Files = d.GetFiles("*.pdf");
+            foreach (FileInfo file in Files)
             {
-                checkBoxPice.Checked = false;
-                checkBoxHrana.Checked = false;
-                checkBoxUkupno.Checked = false;
-            }
-        }
-
-        private void checkBoxUkupno_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxUkupno.Checked)
-            {
-                checkBoxPice.Checked = false;
-                checkBoxHrana.Checked = false;
-                checkBoxTrgovackaRoba.Checked = false;
+                mail.Attachments.Add(new Attachment(AppDomain.CurrentDomain.BaseDirectory + $@"Dokumenti\{file.Name}"));
             }
         }
     }
