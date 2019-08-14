@@ -106,10 +106,9 @@ namespace PCPOS.Report.Kalkposkl
                                     primka.editirano, 
                                     primka.id_poslovnica, 
                                     primka.novo, 
-                                    primka.id, 
                                     primka.zakljucano,
                                     primka_stavke.rabat,
-                                    SUM(primka_stavke.nabavni_iznos) as nabavni_iznos,
+                                    primka.iznos as nabavni_iznos,
                                     SUM(primka_stavke.povratna_naknada) as povratna_naknada,
                                     partners.id_partner,
                                     partners.ime_tvrtke,
@@ -120,7 +119,7 @@ namespace PCPOS.Report.Kalkposkl
                                     LEFT JOIN skladiste ON primka.id_skladiste = skladiste.id_skladiste
                                     WHERE primka.datum >= '{datumOD.ToString("dd-MM-yyyy 00:00:00")}' AND primka.datum <= '{datumDO.ToString("dd-MM-yyyy 23:59:59")}'
                                         AND primka.is_kalkulacija = FALSE {(bool1 ? $"AND primka.id_skladiste = {skladiste_odabir}" : "")} AND primka_stavke.is_kalkulacija = FALSE
-                                    GROUP BY primka.broj_primke,primka.br_ulaznog_doc, primka.id_partner, primka.datum, primka.iznos_bez_poreza, primka.iznos_sa_porezom, primka.carina, primka.valuta, primka.napomena, primka.iznos, primka.id_zaposlenik, primka.is_kalkulacija, primka.editirano, primka.id_poslovnica, primka.novo, primka.id, primka.zakljucano,primka_stavke.rabat,partners.id_partner,partners.ime_tvrtke,skladiste.skladiste;";
+                                    GROUP BY primka.broj_primke, primka.id_skladiste, primka.br_ulaznog_doc, primka.id_partner, primka.datum, primka.iznos_bez_poreza, primka.iznos_sa_porezom, primka.carina, primka.valuta, primka.napomena, primka.iznos, primka.id_zaposlenik, primka.is_kalkulacija, primka.editirano, primka.id_poslovnica, primka.novo, primka.zakljucano,primka_stavke.rabat,partners.id_partner,partners.ime_tvrtke,skladiste.skladiste;";
 
             DataTable dTprimka = new DataTable();
             dTprimka = classSQL.select(queryPrimka, "DTlisteTekst").Tables[0];
